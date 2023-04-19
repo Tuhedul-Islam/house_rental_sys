@@ -1,0 +1,114 @@
+/*For Active Menu */
+[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active {
+    background-color: rgb(222 237 224) !important;
+    color: green !important;
+}
+/*[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active:hover {*/
+/*    background-color: rgba(0,0,0,.1) !important;*/
+/*    color: #000 !important;*/
+/*}*/
+
+
+/*Width*/
+.w-100{
+    width: 100px;
+}
+.w-200{
+    width: 200px;
+}
+.w-300{
+    width: 300px;
+}
+.w-400{
+    width: 400px;
+}
+.w-500{
+    width: 500px;
+}
+
+.required_star{
+    color: red;
+}
+
+.action_btn {
+    padding: 1px 8px !important;
+}
+
+/*tooltip CSS*/
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #E0A800;
+    border-radius: .25rem;
+}
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 5px 5px 0;
+    border-top-color: #E0A800;
+}
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 5px 5px 0;
+    border-right-color: #E0A800;
+}
+.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 0 5px 5px;
+    border-bottom-color: #E0A800;
+}
+.tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
+    right: 0;
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 0 5px 5px;
+    border-left-color: #E0A800;
+}
+/*End tooltip CSS*/
+
+
+/*Navbar Profile Image styles*/
+.profile-img-dropdown_header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+.profile-image-dropdown{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    background-color: #eaf3ec;
+    padding: 2px;
+    border-radius: 50%;
+    margin: -7px 5px 0px 0px;
+}
+.profile-img-div{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background-color: #eaf3ec;
+    padding: 2px;
+    border-radius: 50%;
+    margin: 0px 5px 0px 0px
+}
+.profile-img-dropdown-list{
+    list-style-type: none; margin: 15px 15px 0px 15px;
+    padding: 0px;
+}
+.profile-img-dropdown-list-a{
+    padding: 8px 10px;
+    border-top: 1px solid #d5d5d5;
+}
+.language-dropdown-list-a{
+    padding: 8px 10px;
+    border-top: 1px solid #d5d5d5;
+}
+.navbar-badge {
+    right: 5px !important;
+    top: 0px !important;
+}
+
