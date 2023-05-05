@@ -107,8 +107,8 @@ Route::group(['middleware'=>['auth', 'locale']],function() {
     /*************************************************System management All Setting Route End Here***************/
 
     /*************************************************User Profile Route Start Here*****************/
-    Route::get('user-profile/', [ItemController::class, 'userProfile' ]);
-    Route::post('user-profile/update/', [ItemController::class, 'userProfileUpdate' ]);
+    Route::get('user-profile/', [UserAuthController::class, 'userProfile' ]);
+    Route::post('user-profile/update/', [UserAuthController::class, 'userProfileUpdate' ]);
     /*************************************************User Profile Route End Here*******************/
 
     /********************************************Password Route End Here******************************/

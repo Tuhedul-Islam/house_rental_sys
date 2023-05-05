@@ -11,6 +11,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
@@ -193,6 +194,43 @@ class UserAuthController extends Controller
             }
         }
         return $result;
+    }
+
+    public function userProfile(Request $request){
+        try {
+            $user = User::find(Auth::id());
+            return view('backend.system-management.user-management.profile-update', compact('user'));
+        } catch (RecordsNotFoundException $exception) {
+            return back()->withErrors($exception->getMessage());
+        }
+
+    }
+
+    public function userProfileUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+        ]);
+
+        try {
+            $update_profile = User::find(Auth::user()->id);
+            $update_profile->name = $request->name;
+            $update_profile->user_name = '';
+            $update_profile->email = $request->email;
+            $update_profile->phone_no  = $request->phone_no ;
+            if (!empty($request->password) && (strcmp($request->password, $request->confirm_password) == 0)){
+                $update_profile->password = bcrypt($request->password);
+            }
+            $update_profile->language = empty($update_profile->language)?'en':$update_profile->language;
+            $update_profile->status = 1;
+            $update_profile->save();
+            toastr()->success('Data has been Updated successfully!');
+            return redirect()->back();
+        }catch (Exception $e){
+            toastr()->error('Something went wrong. Please try again. Thanks');
+            return back();
+        }
     }
 
 }
