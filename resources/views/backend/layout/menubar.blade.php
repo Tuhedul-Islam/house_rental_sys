@@ -9,7 +9,7 @@
 
 <aside class="main-sidebar sidebar-light-success elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ url('/dashboard') }}" class="brand-link">
         <img src="{{ asset('frequently-changing/files/favicon/favicon.ico') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
         <span class="brand-text font-weight-bolder">{{ strtoupper('House Rental System') }}</span>
     </a>
@@ -122,7 +122,7 @@
                 </li>
 
                 <!-- System Management -->
-                <?php $menu_open = (Request::is('modules*'))? 'menu-is-opening menu-open':''; ?>
+                <?php $menu_open = (Request::is('settings*'))? 'menu-is-opening menu-open':''; ?>
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
