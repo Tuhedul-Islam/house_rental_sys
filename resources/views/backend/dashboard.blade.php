@@ -1,11 +1,14 @@
 @extends('backend.layout.master')
-
-@section('page-title')
-    Dashboard
-@stop
-
-
 @section('content')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">{{ trans('index.dashboard') }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Small boxes -->
     <div class="row">
         <div class="col-lg-3 col-6">

@@ -133,21 +133,27 @@
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
                         <li class="nav-item">
-                            <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
-                                <i class="far fa-circle mr-1"></i>
+                            <a href="{{ url('/settings/system-setting') }}" class="nav-link {{ ($sub_url=='/settings/system-setting')? 'active':'' }}">
+                                <i class="far fa-circle mr-1 ml-1"></i>
                                 <p>System Setting</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/settings/language-setting') }}" class="nav-link {{ ( (Request::is('settings/language-setting')) || (Request::is('settings/language/*')) )? 'active':'' }}">
+                                <i class="far fa-circle mr-1 ml-1"></i>
+                                <p>Language Setting</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/settings/email-setting') }}" class="nav-link {{ (Request::is('settings/email-setting'))? 'active':'' }}">
+                                <i class="far fa-circle mr-1 ml-1"></i>
+                                <p>Email Setting</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Activity Logs</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
-                                <i class="far fa-circle mr-1"></i>
-                                <p>Language Setup</p>
                             </a>
                         </li>
                     </ul>

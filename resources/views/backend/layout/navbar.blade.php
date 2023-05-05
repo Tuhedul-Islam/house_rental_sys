@@ -40,11 +40,17 @@
         <!-- Language -->
         <li class="nav-item bg-light" title="Language">
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Language</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    @if(app()->getLocale()=='en')
+                        {{ 'English' }}
+                    @else
+                        {{ 'Bangla' }}
+                    @endif
+                </a>
                 <div class="dropdown-menu w-100">
                     <ul class="profile-img-dropdown-list">
-                        <li><a class="dropdown-item language-dropdown-list-a" href="#">English</a></li>
-                        <li><a class="dropdown-item language-dropdown-list-a" href="#">Bangla</a></li>
+                        <li><a class="dropdown-item language-dropdown-list-a" href="{{ url('settings/change-language/en') }}">English</a></li>
+                        <li><a class="dropdown-item language-dropdown-list-a" href="{{ url('settings/change-language/bn') }}">Bangla</a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +78,7 @@
                         </div>
                     </div>
                     <ul class="profile-img-dropdown-list">
-                        <li><a class="dropdown-item profile-img-dropdown-list-a" href="#">Profile Details</a></li>
+                        <li><a class="dropdown-item profile-img-dropdown-list-a" href="{{ url('user-profile') }}">Profile Details</a></li>
                         <li><a class="dropdown-item profile-img-dropdown-list-a" href="{{ url('change-password') }}">Change Password</a></li>
                     </ul>
                 </div>
