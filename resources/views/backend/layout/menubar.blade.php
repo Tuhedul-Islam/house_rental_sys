@@ -43,16 +43,28 @@
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
                         <li class="nav-item">
-                            <a href="{{ url('/users') }}" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
+                            <a href="{{ url('/users') }}" class="nav-link {{ Request::is('users*')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>User List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/house-owners') }}" class="nav-link {{ Request::is('house-owners*')? 'active':'' }}">
+                                <i class="far fa-circle mr-1"></i>
+                                <p>House Owner List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/customers') }}" class="nav-link {{ Request::is('customers*')? 'active':'' }}">
+                                <i class="far fa-circle mr-1"></i>
+                                <p>Customers List</p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- Role Management -->
-                <?php $menu_open = (Request::is('roles*'))? 'menu-is-opening menu-open':''; ?>
+                <?php $menu_open = (Request::is('roles*') || Request::is('permissions*') || Request::is('modules*'))? 'menu-is-opening menu-open':''; ?>
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
@@ -63,29 +75,21 @@
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
                         <li class="nav-item">
-                            <a href="{{ url('/roles') }}" class="nav-link {{ ($sub_url=='/roles')? 'active':'' }}">
+                            <a href="{{ url('/modules') }}" class="nav-link {{ (Request::is('modules*'))? 'active':'' }}">
+                                <i class="far fa-circle mr-1"></i>
+                                <p>Module List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/roles') }}" class="nav-link {{ (Request::is('roles*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Role List</p>
                             </a>
                         </li>
-                    </ul>
-                </li>
-
-                <!-- Module Management -->
-                <?php $menu_open = (Request::is('modules*'))? 'menu-is-opening menu-open':''; ?>
-                <li class="nav-item {{ $menu_open }}">
-                    <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
-                        <i class="mr-1 fas fa-users"></i>
-                        <p>
-                            Module Management
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
                         <li class="nav-item">
-                            <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
+                            <a href="{{ url('/permissions') }}" class="nav-link {{ (Request::is('permissions*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
-                                <p>Module List</p>
+                                <p>Permission List</p>
                             </a>
                         </li>
                     </ul>

@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Module;
+use App\Models\ModuleToPermission;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     public function index(){
         try {
-            $roles = Role::latest()->get();
-            return view('backend.system-management.role-management.index', compact('roles'));
+            $permissions = Permission::latest()->get();
+            return view('backend.system-management.permission-management.index', compact('permissions'));
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -23,8 +24,8 @@ class RoleController extends Controller
 
     public function create(Request $request){
         try {
-            $permissions = Permission::all();
-            return view('backend.system-management.role-management.create', compact('permissions'));
+            $modules = Module::latest()->get();
+            return view('backend.system-management.permission-management.create', compact('modules'));
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -33,18 +34,22 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:roles',
-            'permission' => 'required',
+            'name' => 'required|unique:permissions',
+            'module_id' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
-            $role = Role::create(['name' => $request->name]);
-            $role->givePermissionTo($request->permission);
+            $permission = Permission::create(['name' => $request->name]);
+            ModuleToPermission::create([
+                'module_id' => $request->module_id,
+                'permission_id' => $permission->id,
+                'status' => 1,
+            ]);
 
             DB::commit();
             toastr()->success('Data has been saved successfully!');
-            return redirect('/roles');
+            return redirect('/permissions');
         }catch (Exception $e){
             DB::rollBack();
             toastr()->error('Something went wrong. Please try again. Thanks');
@@ -55,10 +60,11 @@ class RoleController extends Controller
     public function edit($id)
     {
         try {
-            $permissions = Permission::all();
-            $role = Role::find($id);
-            if ($role) {
-                return view('backend.system-management.role-management.edit', compact('role', 'permissions'));
+            $modules = Module::latest()->get();
+            $module_to_permission = ModuleToPermission::with('module', 'permission')->where('permission_id', $id)->first();
+            $permission = Permission::find($id);
+            if ($permission) {
+                return view('backend.system-management.permission-management.edit', compact('modules', 'permission', 'module_to_permission'));
             } else {
                 toastr()->error('Something went wrong. Please try again. Thanks');
                 return back();
@@ -72,19 +78,23 @@ class RoleController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'permission' => 'required',
+            'module_id' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
-            $role = Role::findById($id);
-            $role->name = $request->name;
-            $role->save();
-            $role->syncPermissions($request->permission);
+            $permission = Permission::findById($id);
+            $permission->name = $request->name;
+            if ($permission->save()){
+                $module_to_permission = ModuleToPermission::with('module', 'permission')->where('permission_id', $id)->first();
+                $module_to_permission->update([
+                    'module_id' => $request->module_id,
+                ]);
+            }
 
             DB::commit();
-            toastr()->success('Data has been Updated successfully!');
-            return redirect('/roles');
+            toastr()->success('Data has been saved successfully!');
+            return redirect('/permissions');
         }catch (Exception $e){
             DB::rollBack();
             toastr()->error('Something went wrong. Please try again. Thanks');
@@ -95,11 +105,11 @@ class RoleController extends Controller
     public function delete($id)
     {
         try {
-            $role = Role::find($id);
-            if ($role) {
-                $role->delete();
+            $permission = Permission::find($id);
+            if ($permission) {
+                $permission->delete();
                 toastr()->success('Data Deleted Successfully.');
-                return redirect('/roles');
+                return redirect('/permissions');
             } else {
                 toastr()->error('Something went wrong. Please try again. Thanks');
                 return back();

@@ -11,8 +11,8 @@ class ModuleController extends Controller
 {
     public function index(){
         try {
-            $modules = Module::latest()->get();
-            return view('backend.module-management.index', compact('modules'));
+            $modules = Module::with('moduleToPermission')->latest()->get();
+            return view('backend.system-management.module-management.index', compact('modules'));
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -20,7 +20,7 @@ class ModuleController extends Controller
 
     public function create(Request $request){
         try {
-            return view('backend.module-management.create');
+            return view('backend.system-management.module-management.create');
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -47,7 +47,7 @@ class ModuleController extends Controller
         try {
             $module = Module::find($id);
             if ($module) {
-                return view('backend.module-management.edit', compact('module'));
+                return view('backend.system-management.module-management.edit', compact('module'));
             } else {
                 toastr()->error('Something went wrong. Please try again. Thanks');
                 return back();

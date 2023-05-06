@@ -4,17 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 
-class Module extends Model
+class ModuleToPermission extends Model
 {
     use HasFactory;
 
-    use HasFactory, SoftDeletes;
-
-    protected $table = 'modules';
+    protected $table = 'module_to_permissions';
     public $timestamps = 'true';
     protected $guarded = [];
 
@@ -31,7 +28,11 @@ class Module extends Model
         });
     }
 
-    public function moduleToPermission(){
-        return $this->hasMany(ModuleToPermission::class, 'module_id', 'id');
+    public function module(){
+        return $this->belongsTo(Module::class, 'module_id', 'id');
+    }
+
+    public function permission(){
+        return $this->belongsTo(Permission::class, 'permission_id', 'id');
     }
 }

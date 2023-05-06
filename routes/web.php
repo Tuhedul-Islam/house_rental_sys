@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailSettingController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SystemSettingController;
@@ -72,6 +73,26 @@ Route::group(['middleware'=>['auth', 'locale']],function() {
     Route::get('/get-related-counters', [UserAuthController::class, 'getRelatedCounters' ]);
     /*************************************************User Route End Here*****************************/
 
+    /*************************************************House Owner Route Start Here****************************/
+    Route::get('/house-owners', [UserAuthController::class, 'index']);
+    Route::get('/house-owners/create', [UserAuthController::class, 'create' ]);
+    Route::post('/house-owners/store', [UserAuthController::class, 'store' ]);
+    Route::get('/house-owners/edit/{id}', [UserAuthController::class, 'edit' ]);
+    Route::post('/house-owners/update/{id}', [UserAuthController::class, 'update' ]);
+    Route::get('/house-owners/status/{id}', [UserAuthController::class, 'status' ]);
+    Route::get('/house-owners/delete/{id}', [UserAuthController::class, 'delete' ]);
+    /*************************************************House Owner Route End Here*****************************/
+
+    /*************************************************Customer Route Start Here****************************/
+    Route::get('/customers', [UserAuthController::class, 'index']);
+    Route::get('/customers/create', [UserAuthController::class, 'create' ]);
+    Route::post('/customers/store', [UserAuthController::class, 'store' ]);
+    Route::get('/customers/edit/{id}', [UserAuthController::class, 'edit' ]);
+    Route::post('/customers/update/{id}', [UserAuthController::class, 'update' ]);
+    Route::get('/customers/status/{id}', [UserAuthController::class, 'status' ]);
+    Route::get('/customers/delete/{id}', [UserAuthController::class, 'delete' ]);
+    /*************************************************Customer Route End Here*****************************/
+
     /*************************************************Role management Route Start Here****************/
     Route::get('/roles', [RoleController::class, 'index']);
     Route::get('/roles/create', [RoleController::class, 'create' ]);
@@ -114,6 +135,15 @@ Route::group(['middleware'=>['auth', 'locale']],function() {
     /********************************************Password Route End Here******************************/
     Route::get('/change-password', [NewPasswordController::class, 'changePassword']);
     Route::post('/update-password', [NewPasswordController::class, 'updatePassword']);
+    /********************************************Password Route End Here******************************/
+
+    /********************************************Password Route End Here******************************/
+    Route::get('/permissions', [PermissionController::class, 'index']);
+    Route::get('/permissions/create', [PermissionController::class, 'create' ]);
+    Route::post('/permissions/store', [PermissionController::class, 'store' ]);
+    Route::get('/permissions/edit/{id}', [PermissionController::class, 'edit' ]);
+    Route::post('/permissions/update/{id}', [PermissionController::class, 'update' ]);
+    Route::get('/permissions/delete/{id}', [PermissionController::class, 'delete' ]);
     /********************************************Password Route End Here******************************/
 
 });

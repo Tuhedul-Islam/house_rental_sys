@@ -6,11 +6,10 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">Role List</h3>
+                            <h3 class="m-0">Module List</h3>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ asset('roles/create') }}" class="btn btn-sm btn-success">Add New</a>
-                            {{--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">Add New</button>--}}
+                            <a href="{{ url('modules/create') }}" class="btn btn-sm btn-success">Add New</a>
                         </div>
                     </div>
                 </div>
@@ -19,27 +18,31 @@
                         <thead>
                         <tr>
                             <th>SL</th>
-                            <th>Role Name</th>
+                            <th>Module Name</th>
                             <th>Permissions</th>
                             <th class="text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($roles as $key=>$role)
+                        @forelse($modules as $key=>$module)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $role->name ?? '' }}</td>
+                                <td>{{ $module->name ?? '' }}</td>
                                 <td>
-                                    @foreach($role->getPermissionNames() as $permission)
-                                        {{ $permission ?? '' }}
+                                    @if($module->moduleToPermission)
+                                    @foreach($module->moduleToPermission as $module_to_permission)
+                                        {{ $module_to_permission->permission->name ?? '' }}
                                         {{ ($loop->last)? '':',' }}
                                     @endforeach
+                                    @else
+                                        {{ 'Empty' }}
+                                    @endif
                                 </td>
                                 <td class="text-right">
-                                    <a href="{{ asset('/roles/edit/'.$role->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
+                                    <a href="{{ asset('/modules/edit/'.$module->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ asset('/roles/delete/'.$role->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
+                                    <a href="{{ asset('/modules/delete/'.$module->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

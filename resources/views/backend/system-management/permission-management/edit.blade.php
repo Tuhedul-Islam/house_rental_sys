@@ -6,21 +6,33 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">Edit Module</h3>
+                            <h3 class="m-0">Edit Permission</h3>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ url('modules/') }}" class="btn btn-sm btn-success">Back to List</a>
+                            <a href="{{ asset('permissions/') }}" class="btn btn-sm btn-success">Back to List</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/modules/update/'.$module->id) }}" class="" method="POST" enctype='multipart/form-data'>
+                    <form action="{{ url('/permissions/update/'.$permission->id) }}" class="" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="row">
+                            <div class="col-md-6 mb-2 col-md-4 px-3">
+                                <div class="form-group row">
+                                    <label for="module_id" class="col-form-label text-secondary">Select Module {!! starSign() !!}</label>
+                                    <select class="select2 form-control" name="module_id" id="module_id" required>
+                                        <option value="">Select Module</option>
+                                        @foreach($modules as $module)
+                                            <option {{ ($module->id==$module_to_permission->module_id)?'selected':'' }} value="{{ $module->id }}">{{ $module->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-md-4 px-4">
                                 <div class="form-group row">
-                                    <label for="name" class="col-form-label text-secondary">Name</label>
-                                    <input type="text" class="form-control" name="name" id="name" value="{{ $module->name }}" autofocus autocomplete="off">
+                                    <label for="name" class="col-form-label text-secondary">Permission Name</label>
+                                    <input type="text" class="form-control" name="name" id="name" value="{{ $permission->name }}" autofocus autocomplete="off">
                                     @if ($errors->has('name'))
                                         <span class="error_alert text-danger" role="alert">
                                             {{ $errors->first('name') }}

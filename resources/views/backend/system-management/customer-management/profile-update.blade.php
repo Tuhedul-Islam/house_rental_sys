@@ -6,7 +6,7 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">Edit User</h3>
+                            <h3 class="m-0">Update User Profile</h3>
                         </div>
                         <div class="col-md-6 text-right">
                             <a href="{{ asset('users/') }}" class="btn btn-sm btn-success">Back to List</a>
@@ -14,12 +14,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/users/update/'.$user->id) }}" class="" method="POST" enctype='multipart/form-data'>
+                    <form action="{{ url('user-profile/update/') }}" class="" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="row">
                             <div class="col-md-6 px-4">
                                 <div class="form-group row">
-                                    <label for="name" class="col-form-label text-secondary">Name</label>
+                                    <label for="name" class="col-form-label text-secondary">Name <span class='required_star'> *</span></label>
                                     <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}" autofocus autocomplete="off">
                                     @if ($errors->has('name'))
                                         <span class="error_alert text-danger" role="alert">{{ $errors->first('name') }}</span>
@@ -37,8 +37,8 @@
                             </div>
                             <div class="col-md-6 px-4">
                                 <div class="form-group row">
-                                    <label for="phone_no" class="col-form-label text-secondary">Phone No <span class='required_star'> *</span></label>
-                                    <input type="number" class="form-control" name="phone_no" id="phone_no" value="{{ $user->phone_no }}" autocomplete="off">
+                                    <label for="phone_no" class="col-form-label text-secondary">Phone No <span class='required_star'></span></label>
+                                    <input type="text" class="form-control" name="phone_no" id="phone_no" value="{{ $user->phone_no }}" autocomplete="off">
                                     @if ($errors->has('phone_no '))
                                         <span class="error_alert text-danger" role="alert">{{ $errors->first('phone_no ') }}</span>
                                     @endif
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-6 px-4">
                                 <div class="form-group row">
-                                    <label for="password" class="col-form-label text-secondary">New Password </label>
+                                    <label for="password" class="col-form-label text-secondary">New Password <span class='required_star'></span></label>
                                     <input type="password" class="form-control" name="password" id="password" value="" min="8" autocomplete="off" >
                                     @if ($errors->has('password'))
                                         <span class="error_alert text-danger" role="alert">{{ $errors->first('password') }}</span>
@@ -55,25 +55,13 @@
                             </div>
                             <div class="col-md-6 px-4">
                                 <div class="form-group row">
-                                    <label for="confirm_password" class="col-form-label text-secondary">Confirm Password </label>
+                                    <label for="confirm_password" class="col-form-label text-secondary">Confirm Password</label>
                                     <input type="password" class="form-control" name="confirm_password" id="confirm_password" value="" min="8" autocomplete="off" >
                                     @if ($errors->has('confirm_password'))
                                         <span class="error_alert text-danger" role="alert">{{ $errors->first('confirm_password') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            @php( $getRoleNames = $user->getRoleNames()->toArray())
-                            <div class="col-md-6 mb-2 col-md-4 px-3">
-                                <div class="form-group row">
-                                    <label for="roles" class="col-form-label text-secondary">Role {!! starSign() !!}</label>
-                                    <select class="select2 form-control" name="roles[]" id="roles" required multiple>
-                                        @foreach($roles as $role)
-                                            <option {{ (in_array($role->name, $getRoleNames))? 'selected':'' }} value="{{ $role->id }}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="col-md-12 px-4">
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-info float-right" accesskey="s">Submit</button>

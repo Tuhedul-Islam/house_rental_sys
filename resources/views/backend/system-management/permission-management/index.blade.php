@@ -6,11 +6,10 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">Module List</h3>
+                            <h3 class="m-0">Permission List</h3>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ url('modules/create') }}" class="btn btn-sm btn-success">Add New</a>
-                            {{--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">Add New</button>--}}
+                            <a href="{{ asset('permissions/create') }}" class="btn btn-sm btn-success">Add New</a>
                         </div>
                     </div>
                 </div>
@@ -19,20 +18,27 @@
                         <thead>
                         <tr>
                             <th>SL</th>
-                            <th>Name</th>
+                            <th>Permission Name</th>
+                            <th>Module Name</th>
                             <th class="text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($modules as $key=>$module)
+                        @forelse($permissions as $key=>$permission)
+                            <?php
+                                if (isset($permission)){
+                                    $module_to_permission = \App\Models\ModuleToPermission::with('module', 'permission')->where('permission_id', $permission->id)->first();
+                                }
+                            ?>
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $module->name ?? '' }}</td>
+                                <td>{{ $permission->name ?? '' }}</td>
+                                <td>{{ $module_to_permission->module->name ?? '' }}</td>
                                 <td class="text-right">
-                                    <a href="{{ asset('/modules/edit/'.$module->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
+                                    <a href="{{ asset('/permissions/edit/'.$permission->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ asset('/modules/delete/'.$module->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
+                                    <a href="{{ asset('/permissions/delete/'.$permission->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

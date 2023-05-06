@@ -17,15 +17,27 @@
                     <form action="{{ url('/roles/update/'.$role->id) }}" class="" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="row">
-                            <div class="col-md-4 px-4">
+                            <div class="col-md-6 px-4">
                                 <div class="form-group row">
-                                    <label for="name" class="col-form-label text-secondary">Name</label>
+                                    <label for="name" class="col-form-label text-secondary">Name {!! starSign() !!}</label>
                                     <input type="text" class="form-control" name="name" id="name" value="{{ $role->name }}" autofocus autocomplete="off">
                                     @if ($errors->has('name'))
                                         <span class="error_alert text-danger" role="alert">
                                             {{ $errors->first('name') }}
                                         </span>
                                     @endif
+                                </div>
+                            </div>
+
+                            @php( $getPermissionNames = $role->getPermissionNames()->toArray())
+                            <div class="col-md-6 mb-2 col-md-4 px-3">
+                                <div class="form-group row">
+                                    <label for="roles" class="col-form-label text-secondary">Permission {!! starSign() !!}</label>
+                                    <select class="select2 form-control" name="permission[]" id="roles" required multiple>
+                                        @foreach($permissions as $permission)
+                                            <option {{ (in_array($permission->name, $getPermissionNames))? 'selected':'' }} value="{{ $permission->id }}">{{ $permission->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

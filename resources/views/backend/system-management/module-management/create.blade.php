@@ -6,37 +6,26 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">Create Role</h3>
+                            <h3 class="m-0">Create Module</h3>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ asset('roles/') }}" class="btn btn-sm btn-success">Back to List</a>
+                            <a href="{{ asset('modules/') }}" class="btn btn-sm btn-success">Back to List</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/roles/store') }}" class="" method="POST" enctype='multipart/form-data'>
+                    <form action="{{ url('/modules/store') }}" class="" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 px-4">
+                            <div class="col-md-12 px-4">
                                 <div class="form-group row">
-                                    <label for="name" class="col-form-label text-secondary">Name {!! starSign() !!}</label>
+                                    <label for="name" class="col-form-label text-secondary">Module Name</label>
                                     <input type="text" class="form-control" name="name" id="name" value="" autofocus autocomplete="off">
                                     @if ($errors->has('name'))
                                         <span class="error_alert text-danger" role="alert">
                                             {{ $errors->first('name') }}
                                         </span>
                                     @endif
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-2 col-md-4 px-3">
-                                <div class="form-group row">
-                                    <label for="roles" class="col-form-label text-secondary">Permission {!! starSign() !!}</label>
-                                    <select class="select2 form-control" name="permission[]" id="roles" required multiple>
-                                        @foreach($permissions as $permission)
-                                            <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
 

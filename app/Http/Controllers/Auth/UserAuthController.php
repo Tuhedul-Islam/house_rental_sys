@@ -11,18 +11,36 @@ use App\Models\User;
 use Exception;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UserAuthController extends Controller
 {
     public function index(){
         try {
-            $users = User::latest()->get();
-            return view('backend.system-management.user-management.index', compact('users'));
+            if (\request()->is('users')){
+
+                $users = User::latest()->where('user_type', 1)->get();
+                return view('backend.system-management.user-management.index', compact('users'));
+            }elseif (\request()->is('house-owners')){
+
+                $users = User::latest()->where('user_type', 1)->get();
+                return view('backend.system-management.house-owner-management.index', compact('users'));
+            }elseif (\request()->is('customers')){
+
+                $users = User::latest()->where('user_type', 1)->get();
+                return view('backend.system-management.customer-management.index', compact('users'));
+            }else{
+                return redirect()->back();
+            }
+
+
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -30,7 +48,8 @@ class UserAuthController extends Controller
 
     public function create(Request $request){
         try {
-            return view('backend.system-management.user-management.create');
+            $roles = Role::all();
+            return view('backend.system-management.user-management.create', compact('roles'));
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
@@ -43,12 +62,15 @@ class UserAuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'confirm_password' => 'required|same:password'
+            'confirm_password' => 'required|same:password',
+            'roles' => 'required'
         ]);
 
+        DB::beginTransaction();
         try {
             $create_user = new User();
             $create_user->name = $request->name;
+            $create_user->user_type = 1;
             $create_user->user_name = '';
             $create_user->email = $request->email;
             $create_user->phone_no  = $request->phone_no ;
@@ -56,9 +78,13 @@ class UserAuthController extends Controller
             $create_user->language = 'en';
             $create_user->status = 1;
             $create_user->save();
+            $create_user->assignRole($request->input('roles'));
+
+            DB::commit();
             toastr()->success('Data has been saved successfully!');
             return redirect('/users');
         }catch (Exception $e){
+            DB::rollBack();
             toastr()->error('Something went wrong. Please try again. Thanks');
             return back();
         }
@@ -67,9 +93,10 @@ class UserAuthController extends Controller
     public function edit($id)
     {
         try {
-            $user = User::find($id);
+            $roles = Role::all();
+            $user = User::with('roles')->find($id); //A use with all roles
             if ($user) {
-                return view('backend.system-management.user-management.edit', compact('user'));
+                return view('backend.system-management.user-management.edit', compact('user', 'roles'));
             } else {
                 toastr()->error('Something went wrong. Please try again. Thanks');
                 return back();
@@ -86,9 +113,11 @@ class UserAuthController extends Controller
             'email' => 'required|email',
         ]);
 
+        DB::beginTransaction();
         try {
             $create_user = User::find($id);
             $create_user->name = $request->name;
+            $create_user->user_type = 1;
             $create_user->user_name = '';
             $create_user->email = $request->email;
             $create_user->phone_no  = $request->phone_no ;
@@ -98,9 +127,15 @@ class UserAuthController extends Controller
             $create_user->language = 'en';
             $create_user->status = 1;
             $create_user->save();
+
+            DB::table('model_has_roles')->where('model_id',$create_user->id)->delete();
+            $create_user->assignRole($request->input('roles'));
+
+            DB::commit();
             toastr()->success('Data has been Updated successfully!');
             return redirect('/users');
         }catch (Exception $e){
+            DB::rollBack();
             toastr()->error('Something went wrong. Please try again. Thanks');
             return back();
         }

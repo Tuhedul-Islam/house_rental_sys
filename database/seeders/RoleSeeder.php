@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
         $faker = Faker::create();
 
         Role::updateOrInsert([
-            'name' => 'Super Admin',
+            'name' => 'Admin',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
