@@ -1,5 +1,5 @@
-<?php
- return [
+<?php 
+ return [ 
 "dashboard"=>"Dashboard",
 "setting"=>"Setting",
 "profile"=>"Profile",

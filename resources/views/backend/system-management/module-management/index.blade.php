@@ -30,10 +30,10 @@
                                 <td>{{ $module->name ?? '' }}</td>
                                 <td>
                                     @if($module->moduleToPermission)
-                                    @foreach($module->moduleToPermission as $module_to_permission)
-                                        {{ $module_to_permission->permission->name ?? '' }}
-                                        {{ ($loop->last)? '':',' }}
-                                    @endforeach
+                                        @foreach($module->moduleToPermission as $module_to_permission)
+                                            {{ $module_to_permission->permission->name ?? '' }}
+                                            {{ ($loop->last)? '':',' }}
+                                        @endforeach
                                     @else
                                         {{ 'Empty' }}
                                     @endif

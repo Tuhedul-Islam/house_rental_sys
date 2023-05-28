@@ -24,23 +24,20 @@ class UserAuthController extends Controller
 {
     public function index(){
         try {
+            $user_type = '';
             if (\request()->is('users')){
-
+                $user_type = 1;
                 $users = User::latest()->where('user_type', 1)->get();
-                return view('backend.system-management.user-management.index', compact('users'));
             }elseif (\request()->is('house-owners')){
-
-                $users = User::latest()->where('user_type', 1)->get();
-                return view('backend.system-management.house-owner-management.index', compact('users'));
+                $user_type = 2;
+                $users = User::latest()->where('user_type', 2)->get();
             }elseif (\request()->is('customers')){
-
-                $users = User::latest()->where('user_type', 1)->get();
-                return view('backend.system-management.customer-management.index', compact('users'));
+                $user_type = 3;
+                $users = User::latest()->where('user_type', 3)->get();
             }else{
                 return redirect()->back();
             }
-
-
+            return view('backend.system-management.user-management.index', compact('users', 'user_type'));
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }

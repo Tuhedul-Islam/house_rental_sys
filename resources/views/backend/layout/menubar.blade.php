@@ -5,13 +5,18 @@
     $display_block = 'Style="display:block"';
     //$segment1 = Request::segment(1);
     //dd($root_url, request()->url(), $sub_url);
+    $all_roles = \Spatie\Permission\Models\Role::all()->pluck('name')->toArray();
+    $user_roles = auth()->user()->getRoleNames()->toArray();
+    $permissions_via_roles = auth()->user()->getPermissionsViaRoles();
+    $user_all_permissions = auth()->user()->getAllPermissions();
+    //dd($all_roles, $user_roles, $permissions_via_roles, $user_all_permissions);
 @endphp
 
 <aside class="main-sidebar sidebar-light-success elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/dashboard') }}" class="brand-link">
         <img src="{{ asset('frequently-changing/files/favicon/favicon.ico') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
-        <span class="brand-text font-weight-bolder">{{ strtoupper('House Rental System') }}</span>
+        <span class="brand-text font-weight-bolder">{{ strtoupper('Home Rent') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -21,6 +26,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <!-- Dashboard -->
+                @if(auth()->user()->hasAnyRole($all_roles))
                 <?php $menu_open = (Request::is('dashboard*'))? 'menu-is-opening menu-open':''; ?>
                 <li class="nav-item {{ $menu_open }}">
                     <a href="{{ url('/dashboard') }}" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
@@ -30,9 +36,13 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
 
                 <!-- User Management -->
-                <?php $menu_open = (Request::is('users*'))? 'menu-is-opening menu-open':''; ?>
+                @if(auth()->user()->hasAnyRole($all_roles))
+                <?php $menu_open = (Request::is('users*') || Request::is('house-owners*') || Request::is('customers*'))? 'menu-is-opening menu-open':''; ?>
+                @canany(['user-list','house-owner-list','customer-list'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
@@ -42,29 +52,40 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
+                        @if(auth()->user()->can('user-list'))
                         <li class="nav-item">
                             <a href="{{ url('/users') }}" class="nav-link {{ Request::is('users*')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>User List</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('house-owner-list'))
                         <li class="nav-item">
                             <a href="{{ url('/house-owners') }}" class="nav-link {{ Request::is('house-owners*')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>House Owner List</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('customer-list'))
                         <li class="nav-item">
                             <a href="{{ url('/customers') }}" class="nav-link {{ Request::is('customers*')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Customers List</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                @endcanany
+                @endif
+
 
                 <!-- Role Management -->
+                @if(auth()->user()->hasAnyRole($all_roles))
                 <?php $menu_open = (Request::is('roles*') || Request::is('permissions*') || Request::is('modules*'))? 'menu-is-opening menu-open':''; ?>
+                @canany(['module-list','role-list','permission-list'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
@@ -74,28 +95,38 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
+                        @if(auth()->user()->can('module-list'))
                         <li class="nav-item">
                             <a href="{{ url('/modules') }}" class="nav-link {{ (Request::is('modules*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Module List</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('role-list'))
                         <li class="nav-item">
                             <a href="{{ url('/roles') }}" class="nav-link {{ (Request::is('roles*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Role List</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('permission-list'))
                         <li class="nav-item">
                             <a href="{{ url('/permissions') }}" class="nav-link {{ (Request::is('permissions*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Permission List</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                @endcanany
+                @endif
+
 
                 <!-- Master Data Setup -->
+                @if(auth()->user()->hasAnyRole($all_roles))
                 <?php
                 $menu_open = (Request::is('branch*') || Request::is('item-type*') || Request::is('item-category*') || Request::is('item-sub_category*') || Request::is('unit*') || Request::is('concerns*') || Request::is('counter-desks*') || Request::is('offer-promotion*'))? 'menu-is-opening menu-open':'';
                 ?>
@@ -124,8 +155,11 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+
 
                 <!-- System Management -->
+                @if(auth()->user()->hasAnyRole($all_roles))
                 <?php $menu_open = (Request::is('settings*'))? 'menu-is-opening menu-open':''; ?>
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
@@ -162,8 +196,11 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+
 
                 <!-- Report -->
+                @if(auth()->user()->hasAnyRole($all_roles))
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="mr-1 fas fa-file-alt"></i>
@@ -181,6 +218,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </nav>
     </div>

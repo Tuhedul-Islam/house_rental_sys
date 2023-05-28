@@ -6,11 +6,12 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">User List</h3>
+                            <h3 class="m-0">{{ ($user_type==1)?'User List':(($user_type==2)?'House owner List':'Customer List') }}</h3>
                         </div>
                         <div class="col-md-6 text-right">
+                            @if($user_type==1)
                             <a href="{{ asset('users/create') }}" class="btn btn-sm btn-success">Add New</a>
-                            {{--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">Add New</button>--}}
+                            @endif
                         </div>
                     </div>
                 </div>
