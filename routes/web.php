@@ -6,6 +6,7 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SystemSettingController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -137,13 +138,23 @@ Route::group(['middleware'=>['auth', 'locale']],function() {
     Route::post('/update-password', [NewPasswordController::class, 'updatePassword']);
     /********************************************Password Route End Here******************************/
 
-    /********************************************Password Route End Here******************************/
+    /********************************************Password Route Start Here******************************/
     Route::get('/permissions', [PermissionController::class, 'index']);
     Route::get('/permissions/create', [PermissionController::class, 'create' ]);
     Route::post('/permissions/store', [PermissionController::class, 'store' ]);
     Route::get('/permissions/edit/{id}', [PermissionController::class, 'edit' ]);
     Route::post('/permissions/update/{id}', [PermissionController::class, 'update' ]);
     Route::get('/permissions/delete/{id}', [PermissionController::class, 'delete' ]);
+    /********************************************Password Route End Here******************************/
+
+    /********************************************Slider Route Start Here******************************/
+    Route::get('/sliders', [SliderController::class, 'index']);
+    Route::get('/sliders/create', [SliderController::class, 'create' ]);
+    Route::post('/sliders/store', [SliderController::class, 'store' ]);
+    Route::get('/sliders/edit/{id}', [SliderController::class, 'edit' ]);
+    Route::post('/sliders/update/{id}', [SliderController::class, 'update' ]);
+    Route::get('/sliders/delete/{id}', [SliderController::class, 'delete' ]);
+    Route::get('/sliders/status/{id}', [SliderController::class, 'status' ]);
     /********************************************Password Route End Here******************************/
 
 });

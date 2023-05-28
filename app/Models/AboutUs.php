@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
-class Module extends Model
+class AboutUs extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'modules';
+    protected $table = 'about_us';
     public $timestamps = 'true';
     protected $guarded = [];
 
@@ -27,9 +26,5 @@ class Module extends Model
         static::updating(function ($post) {
             $post->updated_by = Auth::user()->id;
         });
-    }
-
-    public function moduleToPermission(){
-        return $this->hasMany(ModuleToPermission::class, 'module_id', 'id');
     }
 }

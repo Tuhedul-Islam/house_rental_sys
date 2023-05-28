@@ -30,6 +30,7 @@ class UserTableSeeder extends Seeder
             'user_name' => 'admin',
             'email' => 'admin@gmail.com',
             'phone_no' => $faker->phoneNumber,
+            'profile_img' => "frequently-changing/files/profile-img/profile-img.jpg",
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('12345678'),
             'language' => 'en',

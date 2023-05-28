@@ -128,9 +128,9 @@
                 <!-- Master Data Setup -->
                 @if(auth()->user()->hasAnyRole($all_roles))
                 <?php
-                $menu_open = (Request::is('branch*') || Request::is('item-type*') || Request::is('item-category*') || Request::is('item-sub_category*') || Request::is('unit*') || Request::is('concerns*') || Request::is('counter-desks*') || Request::is('offer-promotion*'))? 'menu-is-opening menu-open':'';
+                $menu_open = (Request::is('sliders*') || Request::is('about-us*') || Request::is('contact-us*'))? 'menu-is-opening menu-open':'';
                 ?>
-                @canany(['concern-list'])
+                @canany(['slider-list', 'about-us', 'contact-us'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-tools"></i>
@@ -140,26 +140,25 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
-                        <?php $concern_menu_open = (Request::is('slider-list*'))? 'menu-is-opening menu-open':''; ?>
                         @if(auth()->user()->can('slider-list'))
-                        <li class="nav-item {{ $concern_menu_open }}">
-                            <a href="{{ url('slider-list') }}" class="nav-link {{ (Request::is('slider-list/*'))? 'active':'' }}">
+                        <li class="nav-item">
+                            <a href="{{ url('sliders') }}" class="nav-link {{ (Request::is('sliders*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Slider List</p>
                             </a>
                         </li>
                         @endif
                         @if(auth()->user()->can('about-us'))
-                            <li class="nav-item {{ $concern_menu_open }}">
-                                <a href="{{ url('about-us') }}" class="nav-link {{ (Request::is('about-us/*'))? 'active':'' }}">
+                            <li class="nav-item">
+                                <a href="{{ url('about-us') }}" class="nav-link {{ (Request::is('about-us*'))? 'active':'' }}">
                                     <i class="far fa-circle mr-1"></i>
                                     <p>About Us</p>
                                 </a>
                             </li>
                         @endif
                         @if(auth()->user()->can('contact-us'))
-                            <li class="nav-item {{ $concern_menu_open }}">
-                                <a href="{{ url('contact-us') }}" class="nav-link {{ (Request::is('contact-us/*'))? 'active':'' }}">
+                            <li class="nav-item">
+                                <a href="{{ url('contact-us') }}" class="nav-link {{ (Request::is('contact-us*'))? 'active':'' }}">
                                     <i class="far fa-circle mr-1"></i>
                                     <p>Contact Us</p>
                                 </a>
