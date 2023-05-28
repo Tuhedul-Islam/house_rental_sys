@@ -57,6 +57,21 @@ class PermissionSeeder extends Seeder
             ['name' => 'permission-edit','module' => 'role-management', 'sub_module' => 'permission-list','guard_name' => 'web'],
             ['name' => 'permission-delete','module' => 'role-management', 'sub_module' => 'permission-list','guard_name' => 'web'],
 
+            //Master data setup
+            //slider
+            ['name' => 'slider-list','module' => 'master-data', 'sub_module' => 'slider','guard_name' => 'web'],
+            ['name' => 'slider-create','module' => 'master-data', 'sub_module' => 'slider','guard_name' => 'web'],
+            ['name' => 'slider-edit','module' => 'master-data', 'sub_module' => 'slider','guard_name' => 'web'],
+            ['name' => 'slider-delete','module' => 'master-data', 'sub_module' => 'slider','guard_name' => 'web'],
+
+            //About Us
+            ['name' => 'about-us','module' => 'master-data', 'sub_module' => 'about-us','guard_name' => 'web'],
+            ['name' => 'about-us-edit','module' => 'master-data', 'sub_module' => 'about-us','guard_name' => 'web'],
+
+            //Contact Us
+            ['name' => 'contact-us','module' => 'master-data', 'sub_module' => 'contact-us','guard_name' => 'web'],
+            ['name' => 'contact-edit','module' => 'master-data', 'sub_module' => 'contact-us','guard_name' => 'web'],
+
             //System Management
             //Module
             ['name' => 'system-setting','module' => 'system-management', 'sub_module' => 'system-setting','guard_name' => 'web'],

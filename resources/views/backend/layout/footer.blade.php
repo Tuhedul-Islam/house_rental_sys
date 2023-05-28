@@ -60,12 +60,14 @@
 <script src="{{ asset('frequently-changing/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
 <!-- dropzonejs -->
 <script src="{{ asset('frequently-changing/plugins/dropzone/min/dropzone.min.js') }}"></script>
-<script>
-
-</script>
+<script src="{{ asset('frequently-changing/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <!-- DataTables  & Plugins -->
 @include('backend.layout.data-table-script')
 <script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
         $('.select2').select2();

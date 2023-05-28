@@ -2,7 +2,7 @@
     $root_url = $app->make('url')->to('/');
     $full_url = request()->url();
     $sub_url = str_replace($root_url, '', $full_url);
-    $display_block = 'Style="display:block"';
+    $display_block = 'Style=display:block';
     //$segment1 = Request::segment(1);
     //dd($root_url, request()->url(), $sub_url);
     $all_roles = \Spatie\Permission\Models\Role::all()->pluck('name')->toArray();
@@ -130,6 +130,7 @@
                 <?php
                 $menu_open = (Request::is('branch*') || Request::is('item-type*') || Request::is('item-category*') || Request::is('item-sub_category*') || Request::is('unit*') || Request::is('concerns*') || Request::is('counter-desks*') || Request::is('offer-promotion*'))? 'menu-is-opening menu-open':'';
                 ?>
+                @canany(['concern-list'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-tools"></i>
@@ -138,29 +139,42 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <?php $concern_menu_open = (Request::is('concerns*'))? 'menu-is-opening menu-open':''; ?>
+                    <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
+                        <?php $concern_menu_open = (Request::is('slider-list*'))? 'menu-is-opening menu-open':''; ?>
+                        @if(auth()->user()->can('slider-list'))
                         <li class="nav-item {{ $concern_menu_open }}">
-                            <a href="{{ url('concerns') }}" class="nav-link {{ !empty($concern_menu_open) ? 'active':'' }}">
+                            <a href="{{ url('slider-list') }}" class="nav-link {{ (Request::is('slider-list/*'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
-                                <p>Concern/Stakeholder</p>
+                                <p>Slider List</p>
                             </a>
                         </li>
-                        <?php $offer_promotion = (Request::is('offer-promotion*'))? 'menu-is-opening menu-open':''; ?>
-                        <li class="nav-item {{ $offer_promotion }}">
-                            <a href="{{ url('offer-promotion') }}" class="nav-link {{ !empty($offer_promotion) ? 'active':'' }}">
-                                <i class="far fa-circle mr-1"></i>
-                                <p>Offer and Promotion</p>
-                            </a>
-                        </li>
+                        @endif
+                        @if(auth()->user()->can('about-us'))
+                            <li class="nav-item {{ $concern_menu_open }}">
+                                <a href="{{ url('about-us') }}" class="nav-link {{ (Request::is('about-us/*'))? 'active':'' }}">
+                                    <i class="far fa-circle mr-1"></i>
+                                    <p>About Us</p>
+                                </a>
+                            </li>
+                        @endif
+                        @if(auth()->user()->can('contact-us'))
+                            <li class="nav-item {{ $concern_menu_open }}">
+                                <a href="{{ url('contact-us') }}" class="nav-link {{ (Request::is('contact-us/*'))? 'active':'' }}">
+                                    <i class="far fa-circle mr-1"></i>
+                                    <p>Contact Us</p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
+                @endcanany
                 @endif
 
 
                 <!-- System Management -->
                 @if(auth()->user()->hasAnyRole($all_roles))
                 <?php $menu_open = (Request::is('settings*'))? 'menu-is-opening menu-open':''; ?>
+                @canany(['system-setting','language-setting','email-setting', 'activity-log'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
@@ -170,37 +184,47 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview" {{ !empty($menu_open) ? $display_block:'' }}>
+                        @if(auth()->user()->can('system-setting'))
                         <li class="nav-item">
-                            <a href="{{ url('/settings/system-setting') }}" class="nav-link {{ ($sub_url=='/settings/system-setting')? 'active':'' }}">
+                            <a href="{{ url('/settings/system-setting') }}" class="nav-link {{ (Request::is('settings/system-setting'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1 ml-1"></i>
                                 <p>System Setting</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('language-setting'))
                         <li class="nav-item">
                             <a href="{{ url('/settings/language-setting') }}" class="nav-link {{ ( (Request::is('settings/language-setting')) || (Request::is('settings/language/*')) )? 'active':'' }}">
                                 <i class="far fa-circle mr-1 ml-1"></i>
                                 <p>Language Setting</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('email-setting'))
                         <li class="nav-item">
                             <a href="{{ url('/settings/email-setting') }}" class="nav-link {{ (Request::is('settings/email-setting'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1 ml-1"></i>
                                 <p>Email Setting</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('activity-log'))
                         <li class="nav-item">
                             <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Activity Logs</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                @endcanany
                 @endif
 
 
                 <!-- Report -->
                 @if(auth()->user()->hasAnyRole($all_roles))
+                @canany(['report-list'])
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="mr-1 fas fa-file-alt"></i>
@@ -210,14 +234,17 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @if(auth()->user()->can('report-demo'))
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Demo 1</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                @endcanany
                 @endif
             </ul>
         </nav>
