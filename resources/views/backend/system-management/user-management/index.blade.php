@@ -52,12 +52,14 @@
                                             <i class="fas fa-minus"></i>
                                         </a>
                                     @endif
-                                    <a href="{{ asset('/users/edit/'.$user->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="{{ asset('/users/delete/'.$user->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    @if($user_type==1)
+                                        <a href="{{ asset('/users/edit/'.$user->id) }}" class="btn btn-sm btn-warning action_btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ asset('/users/delete/'.$user->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>git
+                                    @endif
                                 </td>
                             </tr>
                         @empty

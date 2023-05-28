@@ -56,6 +56,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'permission-create','module' => 'role-management', 'sub_module' => 'permission-list','guard_name' => 'web'],
             ['name' => 'permission-edit','module' => 'role-management', 'sub_module' => 'permission-list','guard_name' => 'web'],
             ['name' => 'permission-delete','module' => 'role-management', 'sub_module' => 'permission-list','guard_name' => 'web'],
+
+            //System Management
+            //Module
+            ['name' => 'system-setting','module' => 'system-management', 'sub_module' => 'system-setting','guard_name' => 'web'],
+            ['name' => 'language-setting','module' => 'system-management', 'sub_module' => 'language-setting','guard_name' => 'web'],
+            ['name' => 'email-setting','module' => 'system-management', 'sub_module' => 'email-setting','guard_name' => 'web'],
+            ['name' => 'activity-log','module' => 'system-management', 'sub_module' => 'activity-log','guard_name' => 'web'],
         ];
 
 
