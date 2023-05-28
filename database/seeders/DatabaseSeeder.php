@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             EmailSettingSeeder::class,
             RoleSeeder::class,
             PermissionSeeder::class,
+            SliderSeeder::class,
+            AboutUsSeeder::class,
+            ContactUsSeeder::class,
         ]);
     }
 }

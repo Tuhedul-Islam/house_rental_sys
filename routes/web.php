@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailSettingController;
 use App\Http\Controllers\LocalizationController;
@@ -155,6 +157,19 @@ Route::group(['middleware'=>['auth', 'locale']],function() {
     Route::post('/sliders/update/{id}', [SliderController::class, 'update' ]);
     Route::get('/sliders/delete/{id}', [SliderController::class, 'delete' ]);
     Route::get('/sliders/status/{id}', [SliderController::class, 'status' ]);
-    /********************************************Password Route End Here******************************/
+    /********************************************Slider Route End Here******************************/
+
+    /********************************************About US Route Start Here**************************/
+    Route::get('/about-us', [AboutUsController::class, 'index']);
+    Route::get('/about-us/edit/{id}', [AboutUsController::class, 'edit' ]);
+    Route::post('/about-us/update/{id}', [AboutUsController::class, 'update' ]);
+    /********************************************About US Route End Here***************************/
+
+    /********************************************Contact US Route Start Here**************************/
+    Route::get('/contact-us', [ContactUsController::class, 'index']);
+    Route::post('/contact-us/store', [ContactUsController::class, 'store' ])->withoutMiddleware('auth');
+    Route::get('/contact-us/view/{id}', [ContactUsController::class, 'view' ]);
+    Route::get('/contact-us/delete/{id}', [ContactUsController::class, 'delete' ]);
+    /********************************************Contact US Route End Here***************************/
 
 });

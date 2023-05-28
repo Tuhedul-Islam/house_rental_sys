@@ -23,16 +23,15 @@ class AboutUsSeeder extends Seeder
         DB::table('about_us')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $faker = Faker::create();
-        foreach(range(1,3) as $i) {
-            AboutUs::updateOrInsert([
-                'about_img' => "frequently-changing/files/slider-img/slider_$i.jpeg",
-                'text_content' => 'Explore the Houses',
-                'created_by' => User::first()->id,
-                'updated_by' => User::first()->id,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'status' => 1
-            ]);
-        }
+        AboutUs::updateOrInsert([
+            'about_img' => "frequently-changing/files/about-us-img/about-us.png",
+            'title' => 'WE HAVE THE BEST HOUSES',
+            'desc' => $faker->text,
+            'created_by' => User::first()->id,
+            'updated_by' => User::first()->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'status' => 1
+        ]);
     }
 }

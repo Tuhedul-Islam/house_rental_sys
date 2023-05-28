@@ -58,7 +58,7 @@
                                         </a>
                                         <a href="{{ asset('/users/delete/'.$user->id) }}" class="btn btn-sm btn-danger action_btn" title="Delete">
                                             <i class="fas fa-trash"></i>
-                                        </a>git
+                                        </a>
                                     @endif
                                 </td>
                             </tr>
