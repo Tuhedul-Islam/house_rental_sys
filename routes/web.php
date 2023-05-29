@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailSettingController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -29,13 +30,7 @@ use \App\Http\Controllers\Auth\NewPasswordController;
 */
 
 require __DIR__.'/auth.php';
-/**
- *************************************
- *********Frontend Routes*************
- *************************************
- */
-
-/*************************************************Clear All Cache*************************************/
+/***********Clear All Cache**************/
 Route::get('clear', function (){
     Artisan::call('route:clear');
     Artisan::call('view:clear');
@@ -44,11 +39,18 @@ Route::get('clear', function (){
     Artisan::call('optimize:clear');
     dd('Done');
 });
-/*************************************************Clear All Cache*************************************/
+/*********Clear All Cache************/
+/**
+ *************************************
+ *********Frontend Routes*************
+ *************************************
+ */
+Route::get('/', [ FrontendController::class, 'index']);
+Route::get('/user-login', [ FrontendController::class, 'login']);
+Route::get('/user-register', [ FrontendController::class, 'register']);
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
+
 
 
 /**
@@ -56,6 +58,9 @@ Route::get('/', function () {
  *********Backend Routes**************
  *************************************
  */
+Route::get('/admin/login', function () {
+    return view('auth.login');
+});
 Route::get('/register', function (){
     if (auth()->user()){ return redirect('/dashboard');}else{ return redirect('login'); }
 });
