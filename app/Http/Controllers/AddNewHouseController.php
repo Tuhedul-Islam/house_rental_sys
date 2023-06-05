@@ -81,6 +81,8 @@ class AddNewHouseController extends Controller
             $image->move(public_path($destinationPath), $imageName);
             $addHouse->image = $destinationPath.$imageName;
         }
+        $addHouse->save();
+        dd('dasd');
 
         try {
 
