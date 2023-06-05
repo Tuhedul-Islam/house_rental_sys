@@ -40,7 +40,11 @@
 1. Fonts
 ***********/
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+@import url(googlefontsapi.css);
+/*
+write this in above url
+https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%27
+*/
 @font-face
 {
 	font-family: 'Beyond';
@@ -127,11 +131,11 @@ p a:hover::after
 }
 ::selection
 {
-	
+
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -145,18 +149,18 @@ h1, h2, h3, h4, h5, h6
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 .form-control
 {
-	color: #db5246;
+	color: #343a40;
 }
 section
 {
@@ -421,7 +425,7 @@ section
 }
 .main_nav_col
 {
-	height: 143px;
+	height: 72px;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
 	-ms-transition: all 400ms ease;
@@ -748,7 +752,7 @@ section
 .home
 {
 	width: 100%;
-	height: 85vh;
+	height: 102vh;
 }
 
 
@@ -1462,7 +1466,7 @@ section
 }
 .offers_content
 {
-	
+
 }
 .offers_price
 {
@@ -1869,10 +1873,10 @@ section
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	color: #FFFFFF !important;
-} 
+}
 .input_field:-ms-input-placeholder,
 .text_field:-ms-input-placeholder
-{ 
+{
 	font-size: 12px !important;
 	font-weight: 400 !important;
 	color: #FFFFFF !important;
@@ -2126,7 +2130,7 @@ section
 }
 .footer_nav
 {
-	
+
 }
 .footer_nav_list
 {
@@ -2154,3 +2158,621 @@ section
 {
 	color: #FFFFFF;
 }
+
+
+/*********************************
+All Houses Css
+*********************************/
+.offers_grid
+{
+    width: 100%;
+    margin-top: 66px;
+}
+.offers_item
+{
+    width: 100%;
+    margin-bottom: 46px;
+}
+.offers_item:last-child
+{
+    margin-bottom: 0px;
+}
+.offers_image img
+{
+    width: 100%;
+}
+.offers_image_container
+{
+    width: 100%;
+    height: 100%;
+}
+.offers_image_background
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.offer_name
+{
+    position: absolute;
+    left: 0;
+    bottom: 27px;
+    width: 180px;
+    height: 33px;
+    background: #fa9e1b;
+    overflow: hidden;
+}
+.offer_name a
+{
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    line-height: 35px;
+    padding-left: 22px;
+}
+.offers_content
+{
+
+}
+.offers_price
+{
+    display: inline-block;
+    font-size: 36px;
+    font-weight: 700;
+    color: #eda84a;
+    line-height: 25px;
+}
+.offers_price span
+{
+    font-size: 14px;
+    font-weight: 400;
+    color: #929191;
+    margin-left: 12px;
+}
+.offers_rating
+{
+
+}
+.offers_rating i::before
+{
+    font-size: 13px;
+    margin-right: 2px;
+}
+.offers_text
+{
+    font-size: 14px;
+    font-weight: 400;
+    color: #929191;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+.offers_icons
+{
+    margin-top: 21px;
+}
+.offers_icons_item
+{
+    display: inline-block;
+    margin-right: 15px;
+}
+.offers_icons_item:last-child
+{
+    margin-right: 0px;
+}
+.book_button
+{
+    background: #31124b;
+    margin-top: 39px;
+    margin-bottom: -5px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.book_button:hover
+{
+    opacity: 0.8;
+}
+.offer_reviews
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.offer_reviews_content
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+}
+.offer_reviews_title
+{
+    font-size: 12px;
+    font-weight: 700;
+    color: #2d2c2c;
+    text-transform: uppercase;
+}
+.offer_reviews_subtitle
+{
+    font-size: 12px;
+    font-weight: 600;
+    color: #929191;
+    margin-top: 1px;
+}
+.offer_reviews_rating
+{
+    display: inline-block;
+    width: 62px;
+    height: 57px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 57px;
+    background: #fa9e1b;
+    vertical-align: middle;
+    border-radius: 45%;
+    -webkit-transform: translateY(-4px);
+    -moz-transform: translateY(-4px);
+    -ms-transform: translateY(-4px);
+    -o-transform: translateY(-4px);
+    transform: translateY(-4px);
+}
+
+/*********************************
+Single House View Css
+*********************************/
+.single_listing
+{
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 107px;
+}
+.hotel_title
+{
+    font-size: 30px;
+    font-weight: 600;
+    color: #2d2c2c;
+}
+.hotel_rating
+{
+    margin-top: -5px;
+}
+.hotel_location
+{
+    font-size: 16px;
+    color: #929191;
+    margin-top: 9px;
+}
+.book_button
+{
+    background: #31124b;
+}
+.book_button a
+{
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.book_button:hover
+{
+    opacity: 0.8;
+}
+.hotel_map_link_container
+{
+    margin-top: 14px;
+}
+.hotel_map_link
+{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2c2c;
+    line-height: 34px;
+    cursor: pointer;
+    border-bottom: solid 2px #fa9e1b;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+.hotel_map_link:hover
+{
+    color: #fa9e1b;
+}
+
+/*********************************
+9.1 Hotel Image
+*********************************/
+
+.hotel_image
+{
+    margin-top: 29px;
+    z-index: 1;
+}
+.hotel_image img
+{
+    width: 100%;
+}
+.hotel_review_container
+{
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 209px;
+    height: 112px;
+    background: #FFFFFF;
+    visibility: hidden;
+    opacity: 0;
+    animation: review_anim 1s 0.5s forwards;
+}
+@keyframes review_anim
+{
+    from
+    {
+        top: 52px;
+        visibility: hidden;
+        opacity: 0;
+    }
+    to
+    {
+        top: 22px;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+.hotel_review_content
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+}
+.hotel_review_title
+{
+    font-size: 12px;
+    font-weight: 700;
+    color: #2d2c2c;
+    text-transform: uppercase;
+}
+.hotel_review_subtitle
+{
+    font-size: 12px;
+    font-weight: 600;
+    color: #929191;
+    margin-top: 1px;
+}
+.hotel_review_rating
+{
+    display: inline-block;
+    width: 62px;
+    height: 57px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 57px;
+    background: #fa9e1b;
+    vertical-align: middle;
+    border-radius: 45%;
+    -webkit-transform: translateY(-4px);
+    -moz-transform: translateY(-4px);
+    -ms-transform: translateY(-4px);
+    -o-transform: translateY(-4px);
+    transform: translateY(-4px);
+}
+
+/*********************************
+9.2 Hotel Gallery
+*********************************/
+
+.hotel_gallery
+{
+    width: 100%;
+    margin-top: 32px;
+}
+.hotel_slider_container
+{
+    width: 100%;
+}
+.hotel_slider
+{
+    width: 100%;
+}
+.hotel_slider_nav
+{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+}
+.hotel_slider_nav .nav_path,
+.hotel_slider_nav .nav_arrow
+{
+    fill: #c4ced2;
+}
+.hotel_slider_prev
+{
+    left: -60px;
+}
+.hotel_slider_next
+{
+    right: -60px;
+}
+.hotel_slider_prev:hover .nav_path,
+.hotel_slider_prev:hover .nav_arrow
+{
+    fill: url(#hotel_grad_prev);
+}
+.hotel_slider_next:hover .nav_path,
+.hotel_slider_next:hover .nav_arrow
+{
+    fill: url(#hotel_grad_next);
+}
+
+/*********************************
+9.3 Hotel Info Text
+*********************************/
+
+.hotel_info_text
+{
+    margin-top: 45px;
+}
+.hotel_info_text p
+{
+    color: #929191;
+}
+
+/*********************************
+9.4 Hotel Info Tags
+*********************************/
+
+.hotel_info_tags
+{
+    margin-top: 45px;
+}
+.hotel_icons_item
+{
+    display: inline-block;
+    margin-right: 15px;
+}
+.hotel_icons_item:last-child
+{
+    margin-right: 0px;
+}
+
+/*********************************
+10. Rooms
+*********************************/
+
+.rooms
+{
+    margin-top: 69px;
+}
+.room
+{
+    margin-bottom: 33px;
+}
+.room:last-child
+{
+    margin-bottom: 0px;
+}
+.room_image
+{
+    width: 100%;
+}
+.room_image img
+{
+    width: 100%;
+}
+.room_content
+{
+
+}
+.room_title
+{
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2c2c;
+    margin-top: -5px;
+}
+.room_price
+{
+    font-size: 16px;
+    font-weight: 600;
+    color: #929191;
+    margin-top: 9px;
+}
+.room_text
+{
+    font-size: 16px;
+    font-weight: 600;
+    color: #fa9e1b;
+    margin-top: 6px;
+}
+.room_extra
+{
+    font-size: 14px;
+    font-weight: 400;
+    color: #2d2c2c;
+    margin-top: 5px;
+}
+.room_button
+{
+    margin-top: 24px;
+}
+
+/*********************************
+11. Reviews
+*********************************/
+
+.reviews
+{
+    margin-top: 98px;
+}
+.reviews_title
+{
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2c2c;
+    text-transform: uppercase;
+}
+.reviews_container
+{
+    margin-top: 61px;
+}
+.review
+{
+    margin-bottom: 91px;
+}
+.review:last-child
+{
+    margin-bottom: 0px;
+}
+.review_image
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.review_image img
+{
+    width: 100%;
+}
+.review_title
+{
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #2d2c2c;
+    margin-top: -3px;
+}
+.review_rating
+{
+    display: inline-block;
+    position: absolute;
+    bottom: 7px;
+    right: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: #fa9e1b;
+    padding-left: 25px;
+    padding-right: 25px;
+    line-height: 43px;
+    border-radius: 22px;
+}
+.review_text
+{
+    margin-top: 24px;
+}
+.review_text p:last-of-type
+{
+    margin-bottom: 0px;
+}
+.review_name
+{
+    font-size: 14px;
+    font-weight: 400;
+    color: #2d2c2c;
+    margin-top: 19px;
+}
+.review_date
+{
+    font-size: 12px;
+    font-weight: 600;
+    color: #fa9e1b;
+    margin-top: 4px;
+}
+
+.related_house {
+    margin-bottom: 45px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2c2c;
+    text-transform: uppercase;
+}
+
+
+/*********************************
+About Us
+*********************************/
+.about-home
+{
+    width: 100%;
+    height: 305px;
+    background: transparent;
+}
+.home_background
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.home_content
+{
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.home_title {
+    font-size: 72px;
+    font-weight: 800;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.intro
+{
+    width: 100%;
+    padding-top: 92px;
+    padding-bottom: 105px;
+    background: #f6f9fb;
+}
+.intro_image
+{
+    position: absolute;
+    right: 0;
+    top: 13px;
+}
+.intro_title
+{
+    font-size: 30px;
+    font-weight: 700;
+    color: #2d2c2c;
+    text-transform: uppercase;
+}
+.intro_text
+{
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: #929191;
+    margin-top: 60px;
+}
+.intro_button
+{
+    margin-top: 57px;
+    z-index: 1;
+}
+

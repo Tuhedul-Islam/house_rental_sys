@@ -67,11 +67,11 @@
                             </li>
                             <li class="contact_info_item d-flex flex-row">
                                 <div><div class="contact_info_icon"><img src="{{ asset('frequently-changing/frontend/images/message.svg') }}" alt=""></div></div>
-                                <div class="contact_info_text"><a href="https://preview.colorlib.com/cdn-cgi/l/email-protection#b2d1dddcc6d3d1c6dfd7f2d5dfd3dbde9cd1dddf8de1c7d0d8d7d1c68ffad7dededd" target="_top"><span class="__cf_email__" data-cfemail="accfc3c2d8cdcfd8c1c9eccbc1cdc5c082cfc3c1">[email&#160;protected]</span></a></div>
+                                <div class="contact_info_text"><a href="#" target="_top"><span class="__cf_email__" data-cfemail="accfc3c2d8cdcfd8c1c9eccbc1cdc5c082cfc3c1">[email&#160;protected]</span></a></div>
                             </li>
                             <li class="contact_info_item d-flex flex-row">
                                 <div><div class="contact_info_icon"><img src="{{ asset('frequently-changing/frontend/images/planet-earth.svg') }}" alt=""></div></div>
-                                <div class="contact_info_text"><a href="https://colorlib.com/">www.colorlib.com</a></div>
+                                <div class="contact_info_text"><a href="#">facebook.com</a></div>
                             </li>
                         </ul>
                     </div>

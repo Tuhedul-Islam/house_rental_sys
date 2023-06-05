@@ -15,8 +15,15 @@
                         </ul>
                     </div>
                     <div class="user_box ml-auto">
-                        <div class="user_box_login user_box_link"><a href="{{ url('user-login') }}">Login</a></div>
-                        <div class="user_box_register user_box_link"><a href="{{ url('user-register') }}">Register</a></div>
+                        @if( (isset(auth()->user()->user_type)) && ((auth()->user()->user_type ==2) || (auth()->user()->user_type ==3)))
+                            <div class="user_box_login user_box_link"><a href="{{ url('user-dashboard') }}">{!! \Illuminate\Support\Facades\Auth::user()->name !!}</a></div>
+                            <div class="user_box_login user_box_link"><a href="{{ url('user-dashboard') }}">{!! 'Dashboard' !!}</a></div>
+                            <div class="user_box_login user_box_link"><a href="{{ url('add-new-house') }}">{!! 'Add New House' !!}</a></div>
+                            <div class="user_box_register user_box_link"><a href="{{ url('user-logout') }}">{!! 'Logout' !!}</a></div>
+                        @else
+                            <div class="user_box_login user_box_link"><a href="{{ url('user-login') }}">Login</a></div>
+                            <div class="user_box_register user_box_link"><a href="{{ url('user-register') }}">Register</a></div>
+                        @endif
                     </div>
                 </div>
             </div>

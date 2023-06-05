@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AddNewHouseController;
+use App\Http\Controllers\ClientRegisterController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailSettingController;
@@ -48,7 +50,23 @@ Route::get('clear', function (){
 Route::get('/', [ FrontendController::class, 'index']);
 Route::get('/user-login', [ FrontendController::class, 'login']);
 Route::get('/user-register', [ FrontendController::class, 'register']);
+Route::get('/all-houses', [ FrontendController::class, 'allHouses']);
+Route::get('/single-house-details/{id}', [ FrontendController::class, 'singleHouseDetails']);
+Route::get('/about', [ FrontendController::class, 'aboutUs']);
+Route::get('/contact', [ FrontendController::class, 'contactUs']);
+//Register/login Client
+Route::post('/user-register', [ ClientRegisterController::class, 'userRegister']);
+Route::post('/user-login', [ ClientRegisterController::class, 'userLogin']);
 
+//Frontend Dashboard routes
+Route::group(['middleware'=>['frontAuthUser']],function() {
+    Route::get('/user-dashboard', [ AddNewHouseController::class, 'userDashboard']);
+    //Add new house
+    Route::get('/add-new-house', [ AddNewHouseController::class, 'create']);
+    Route::post('/new-house-store', [ AddNewHouseController::class, 'store']);
+    Route::post('/delete-single-house/{id}', [ AddNewHouseController::class, 'delete']);
+    Route::get('/user-logout', [ FrontendController::class, 'userLogout']);
+});
 
 
 
@@ -64,7 +82,7 @@ Route::get('/admin/login', function () {
 Route::get('/register', function (){
     if (auth()->user()){ return redirect('/dashboard');}else{ return redirect('login'); }
 });
-Route::group(['middleware'=>['auth', 'locale']],function() {
+Route::group(['middleware'=>['auth', 'locale', 'checkFrontendUser']],function() {
     /*************************************************Dashboard Route Start Here*************************************/
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     /*************************************************Dashboard Route End Here***************************************/

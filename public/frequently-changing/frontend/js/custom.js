@@ -20,7 +20,7 @@ $(document).ready(function()
 {
 	"use strict";
 
-	/* 
+	/*
 
 	1. Vars and Inits
 
@@ -50,7 +50,7 @@ $(document).ready(function()
 	initTestSlider();
 	initSearchForm();
 
-	/* 
+	/*
 
 	2. Set Header
 
@@ -86,7 +86,7 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
+	/*
 
 	3. Init Home Slider
 
@@ -103,7 +103,7 @@ $(document).ready(function()
 				items:1,
 				loop:true,
 				autoplay:true,
-				nav:true,
+				nav:false,
 				dots:true,
 				smartSpeed:1200,
 				dotsContainer:'main_slider_custom_dots'
@@ -146,7 +146,7 @@ $(document).ready(function()
 			{
 				$('.home_slider_custom_dot').removeClass('active');
 				$('.home_slider_custom_dots li').eq(event.page.index).addClass('active');
-			});	
+			});
 
 			// add animate.css class(es) to the elements to be animated
 			function setAnimation ( _elem, _InOut )
@@ -185,7 +185,7 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
+	/*
 
 	4. Init Menu
 
@@ -222,7 +222,7 @@ $(document).ready(function()
 				}
 			});
 
-	
+
 		}
 	}
 
@@ -238,7 +238,7 @@ $(document).ready(function()
 		menuActive = false;
 	}
 
-	/* 
+	/*
 
 	5. Init Search
 
@@ -261,7 +261,7 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
+	/*
 
 	6. Init CTA Slider
 
@@ -306,7 +306,7 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
+	/*
 
 	7. Init Testimonials Slider
 
@@ -357,7 +357,7 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
+	/*
 
 	8. Init Search Form
 
@@ -398,7 +398,7 @@ $(document).ready(function()
 					searchForm.removeClass('active');
 					searchActive = false;
 				}
-			});	
+			});
 		}
 	}
 });

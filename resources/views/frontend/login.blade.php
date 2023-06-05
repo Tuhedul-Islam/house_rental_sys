@@ -16,13 +16,12 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="contact_form_container">
-                        <div class="contact_title">get in touch</div>
-                        <form action="#" id="contact_form" class="contact_form">
-                            <input type="text" id="contact_form_name" class="contact_form_name input_field" placeholder="Name" required="required" data-error="Name is required.">
-                            <input type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="E-mail" required="required" data-error="Email is required.">
-                            <input type="text" id="contact_form_subject" class="contact_form_subject input_field" placeholder="Subject" required="required" data-error="Subject is required.">
-                            <textarea id="contact_form_message" class="text_field contact_form_message" name="message" rows="4" placeholder="Message" required="required" data-error="Please, write us a message."></textarea>
-                            <button type="submit" id="form_submit_button" class="form_submit_button button">send message</button>
+                        <div class="contact_title">Client Login</div>
+                        <form action="{{ url('user-login') }}" method="post" id="contact_form" class="contact_form">
+                            @csrf
+                            <input type="email" name="email" id="contact_form_subject" class="contact_form_subject input_field" placeholder="Email" required="required" data-error="Email is required.">
+                            <input type="password" name="password" id="contact_form_subject" class="contact_form_subject input_field" placeholder="Password" required="required" data-error="Password is required.">
+                            <button type="submit" id="form_submit_button" class="form_submit_button button">Login</button>
                         </form>
                     </div>
                 </div>
