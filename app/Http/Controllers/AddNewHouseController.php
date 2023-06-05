@@ -85,7 +85,7 @@ class AddNewHouseController extends Controller
 
             DB::commit();
             toastr()->success('Data has been saved successfully!');
-            return redirect('/user-dashboard');
+            return redirect()->back();
         }catch (Exception $e){
             DB::rollBack();
             toastr()->error('Something went wrong. Please try again. Thanks');
