@@ -64,7 +64,7 @@ Route::group(['middleware'=>['frontAuthUser']],function() {
     //Add new house
     Route::get('/add-new-house', [ AddNewHouseController::class, 'create']);
     Route::post('/new-house-store', [ AddNewHouseController::class, 'store']);
-    Route::post('/delete-single-house/{id}', [ AddNewHouseController::class, 'delete']);
+    Route::get('/delete-single-house/{id}', [ AddNewHouseController::class, 'delete']);
     Route::get('/user-logout', [ FrontendController::class, 'userLogout']);
 });
 

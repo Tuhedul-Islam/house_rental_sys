@@ -17,10 +17,11 @@ class FrontAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (isset(Auth::user()->user_type) && Auth::user()->user_type!=1){
+        if (Auth::user()){
             return $next($request);
-        }else{
-            return redirect('/');
         }
+//        else{
+//            return redirect('/');
+//        }
     }
 }

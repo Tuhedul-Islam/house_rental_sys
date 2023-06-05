@@ -60,32 +60,27 @@ class AddNewHouseController extends Controller
         ]);
 
         DB::beginTransaction();
-
-        $addHouse = new AddNewHouse();
-        $addHouse->house_type = $request->house_type;
-        $addHouse->location = $request->location;
-        $addHouse->price = $request->price;
-        $addHouse->no_of_rooms = $request->no_of_rooms;
-        $addHouse->no_of_belcony = $request->no_of_belcony;
-        $addHouse->service_charge = $request->service_charge;
-        $addHouse->gas_available = $request->gas_available;
-        $addHouse->current_bill = $request->current_bill;
-        $addHouse->generator = $request->generator;
-        $addHouse->description = $request->description;
-
-        if($request->file('image')) {
-            $this->validate($request,['image'=>'mimes:jpeg,jpg,png']);
-            $image = $request->file('image');
-            $imageName = time().rand().'.'.trim($image->getClientOriginalExtension());
-            $destinationPath = 'frequently-changing/files/house-img/';
-            $image->move(public_path($destinationPath), $imageName);
-            $addHouse->image = $destinationPath.$imageName;
-        }
-        $addHouse->save();
-        dd('dasd');
-
         try {
+            $addHouse = new AddNewHouse();
+            $addHouse->house_type = $request->house_type;
+            $addHouse->location = $request->location;
+            $addHouse->price = $request->price;
+            $addHouse->no_of_rooms = $request->no_of_rooms;
+            $addHouse->no_of_belcony = $request->no_of_belcony;
+            $addHouse->service_charge = $request->service_charge;
+            $addHouse->gas_available = $request->gas_available;
+            $addHouse->current_bill = $request->current_bill;
+            $addHouse->generator = $request->generator;
+            $addHouse->description = $request->description;
 
+            if($request->file('image')) {
+                $this->validate($request,['image'=>'mimes:jpeg,jpg,png']);
+                $image = $request->file('image');
+                $imageName = time().rand().'.'.trim($image->getClientOriginalExtension());
+                $destinationPath = 'frequently-changing/files/house-img/';
+                $image->move(public_path($destinationPath), $imageName);
+                $addHouse->image = $destinationPath.$imageName;
+            }
             $addHouse->save();
 
             DB::commit();
