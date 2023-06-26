@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddNewHouse;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Session;
 class FrontendController extends Controller
 {
     public function index(){
-        return view('frontend.home');
+        $sliders = Slider::where('status', 1)->get();
+        return view('frontend.home', compact('sliders'));
     }
 
     public function login(){

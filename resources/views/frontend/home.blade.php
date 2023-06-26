@@ -9,18 +9,17 @@
     <div class="home">
         <div class="home_slider_container">
             <div class="owl-carousel owl-theme home_slider">
-                @for($i=1; $i<4; $i++)
+                @foreach($sliders as $slider)
                 <div class="owl-item home_slider_item">
-                    <div class="home_slider_background" style="background-image:url(frequently-changing/frontend/images/home_slider.jpg)"></div>
+                    <div class="home_slider_background" style="background-image:url({{$slider->slider_img}})"></div>
                     <div class="home_slider_content text-center">
                         <div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
-                            <h1>discover</h1>
-                            <h1>the world</h1>
+                            <h1>{{ $slider->text_content??'' }}</h1>
                             {{--<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now</a></div>--}}
                         </div>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
 
             <div class="home_slider_nav home_slider_prev">
