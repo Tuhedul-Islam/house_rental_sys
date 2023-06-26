@@ -20,8 +20,8 @@ class FrontAuthMiddleware
         if (Auth::user()){
             return $next($request);
         }
-//        else{
-//            return redirect('/');
-//        }
+        else{
+            return redirect('/');
+        }
     }
 }
