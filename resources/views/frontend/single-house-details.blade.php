@@ -84,7 +84,7 @@
                             @endforeach
                         </div>
 
-                        @if( (isset(auth()->user()->user_type)) && ((auth()->user()->user_type ==2) || (auth()->user()->user_type ==3)))
+                        @if( ((isset( auth()->user()->user_type)) && (auth()->user()->user_type ==3)) || (auth()->user()->id != $house->created_by ))
                             <div class="row">
                                 <div class="col-lg-12" style="margin-bottom: 10px">
                                     <div class="offers_grid">
