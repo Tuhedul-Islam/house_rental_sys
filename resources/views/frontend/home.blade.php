@@ -132,18 +132,18 @@
                 </div>
             </div>
             <div class="row intro_items">
-                @for($i=1; $i<4; $i++)
+                @foreach($top_review_houses as $top_h)
                 <div class="col-lg-4 intro_col">
                     <div class="intro_item">
                         <div class="intro_item_overlay"></div>
 
-                        <div class="intro_item_background" style="background-image:url(frequently-changing/frontend/images/intro_<?php echo $i;?>.jpg)"></div>
+                        <div class="intro_item_background" style="background-image:url({{ $top_h->reviewedHouse->image }})"></div>
                         <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-                            <div class="intro_date">May 25th - June 01st</div>
-                            <div class="button intro_button"><div class="button_bcg"></div><a href="#">see more</a></div>
+                            <div class="intro_date">{{ $top_h->reviewedHouse->created_at ??'' }}</div>
+                            <div class="button intro_button"><div class="button_bcg"></div><a href="{{ url('single-house-details/'.$top_h->reviewedHouse->id) }}">see more</a></div>
                             <div class="intro_center text-center">
-                                <h1>Mauritius</h1>
-                                <div class="intro_price">From $1450</div>
+                                {{--<h1>Mauritius</h1>--}}
+                                <div class="intro_price">{{ $top_h->reviewedHouse->price ??'' }}</div>
                                 <div class="rating rating_4">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

@@ -13,7 +13,9 @@ class FrontendController extends Controller
 {
     public function index(){
         $sliders = Slider::where('status', 1)->get();
-        return view('frontend.home', compact('sliders'));
+        $top_review_houses = HouseReview::with('reviewedHouse')->select('house_id')->groupBy('house_id')->limit(3)->get();
+
+        return view('frontend.home', compact('sliders', 'top_review_houses'));
     }
 
     public function login(){
