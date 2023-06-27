@@ -27,6 +27,7 @@ class CreateAddNewHousesTable extends Migration
             $table->tinyInteger('generator')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('booked_status')->default(0)->comment("1=>booked, 0=>not booked");
+            $table->smallInteger('booked_by')->nullable();
             $table->smallInteger('created_by')->nullable();
             $table->smallInteger('updated_by')->nullable();
             $table->timestamps();

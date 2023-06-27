@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddNewHouse;
 use App\Models\Branch;
 use App\Models\Concern;
 use App\Models\CounterDesk;
@@ -263,6 +264,13 @@ class UserAuthController extends Controller
             toastr()->error('Something went wrong. Please try again. Thanks');
             return back();
         }
+    }
+
+
+    public function houseList($id){
+        $houses = AddNewHouse::where('created_by', $id)->get();
+        $house_owner = User::find($id);
+        return view('backend.system-management.user-management.house-list', compact('houses', 'house_owner'));
     }
 
 }

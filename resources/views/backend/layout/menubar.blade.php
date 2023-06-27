@@ -209,7 +209,7 @@
                         @endif
                         @if(auth()->user()->can('activity-log'))
                         <li class="nav-item">
-                            <a href="{{ url('/modules') }}" class="nav-link {{ ($sub_url=='/modules')? 'active':'' }}">
+                            <a href="{{ url('/settings/all-reviews') }}" class="nav-link {{ (Request::is('settings//all-reviews'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
                                 <p>Activity Logs</p>
                             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddNewHouse;
+use App\Models\HouseReview;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,11 @@ class FrontendController extends Controller
 
     public function singleHouseDetails($id){
         $house = AddNewHouse::find($id);
-        return view('frontend.single-house-details', compact('house'));
+        $related_houses = AddNewHouse::where('house_type', $house->house_type)->orderBY('id', 'DESC')->get();
+        $reviews = HouseReview::with('reviewBy', 'reviewedHouse')->where('house_id', $id)
+            ->limit(10)->orderBy('id', 'DESC')->get();
+
+        return view('frontend.single-house-details', compact('house', 'related_houses', 'reviews'));
     }
 
     public function aboutUs(){

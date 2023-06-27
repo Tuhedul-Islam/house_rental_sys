@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class AddNewHouse extends Model
+class HouseReview extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $table = 'add_new_houses';
     public $timestamps = 'true';
     protected $guarded = [];
 
@@ -27,7 +27,11 @@ class AddNewHouse extends Model
         });
     }
 
-    public function bookedBy(){
-        return $this->belongsTo(User::class, 'booked_by', 'id');
+    public function reviewBy(){
+        return $this->belongsTo(User::class,'user_id', 'id');
+    }
+
+    public function reviewedHouse(){
+        return $this->belongsTo(AddNewHouse::class,'house_id', 'id');
     }
 }

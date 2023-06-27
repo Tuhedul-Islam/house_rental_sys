@@ -9,6 +9,7 @@ use App\Http\Controllers\EmailSettingController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SliderController;
@@ -65,6 +66,11 @@ Route::group(['middleware'=>['frontAuthUser']],function() {
     Route::get('/add-new-house', [ AddNewHouseController::class, 'create']);
     Route::post('/new-house-store', [ AddNewHouseController::class, 'store']);
     Route::get('/delete-single-house/{id}', [ AddNewHouseController::class, 'delete']);
+    Route::get('/owner-change-password/', [ AddNewHouseController::class, 'hOwnerChangePass']);
+    Route::post('/update-owner-password/', [ AddNewHouseController::class, 'updateOwnerPass']);
+    Route::get('/booked-house/{house_id}', [ AddNewHouseController::class, 'bookedHouse']);
+    Route::get('/all-booked-houses/', [ AddNewHouseController::class, 'allBookedHouses']);
+    Route::post('/house-review/{house_id}', [ AddNewHouseController::class, 'houseReview']);
     Route::get('/user-logout', [ FrontendController::class, 'userLogout']);
 });
 
@@ -107,6 +113,7 @@ Route::group(['middleware'=>['auth', 'locale', 'checkFrontendUser']],function() 
     Route::post('/house-owners/update/{id}', [UserAuthController::class, 'update' ]);
     Route::get('/house-owners/status/{id}', [UserAuthController::class, 'status' ]);
     Route::get('/house-owners/delete/{id}', [UserAuthController::class, 'delete' ]);
+    Route::get('/house-owners/house-list/{id}', [UserAuthController::class, 'houseList' ]);
     /*************************************************House Owner Route End Here*****************************/
 
     /*************************************************Customer Route Start Here****************************/
@@ -150,6 +157,9 @@ Route::group(['middleware'=>['auth', 'locale', 'checkFrontendUser']],function() 
         //Email Setting
         Route::get('email-setting', [EmailSettingController::class, 'emailSetting' ]);
         Route::post('email-setting-store', [EmailSettingController::class, 'emailSettingStore' ]);
+        //All Reviews
+        Route::get('all-reviews', [ReviewController::class, 'allReviews' ]);
+        Route::get('house-review-delete/{id}', [ReviewController::class, 'reviewDelete' ]);
     });
     /*************************************************System management All Setting Route End Here***************/
 

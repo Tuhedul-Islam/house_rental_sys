@@ -25,7 +25,9 @@
                                     </div>
                                 </div>
                                 <div class="hotel_title_button ml-lg-auto text-lg-right">
-                                    <div class="button book_button trans_200"><a href="#">book</a></div>
+                                    <div class="button book_button trans_200">
+                                        @if((auth()->user()->user_type==3) && ($house->booked_status==0))<a href="{{ url('booked-house/'.$house->id) }}">book</a>@endif
+                                    </div>
                                 </div>
                             </div>
 
@@ -59,23 +61,22 @@
 
                         <div class="rooms">
                             <div class="related_house">Related Houses</div>
-                            @foreach(range(1,4) as $val)
+                            @foreach($related_houses as $val)
                             <div class="room">
                                 <div class="row">
                                     <div class="col-lg-2">
-                                        <div class="room_image"><img src="{{ asset('frequently-changing/frontend/images/room_1.jpg') }}" alt="Room"></div>
+                                        <div class="room_image"><img src="{{ asset($val->image) }}" alt="Room"></div>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="room_content">
-                                            <div class="room_title">Double or Twin Room</div>
-                                            <div class="room_price">$99/night</div>
-                                            <div class="room_text">FREE cancellation before 23:59 on 20 December 2017</div>
-                                            <div class="room_extra">Breakfast $7.50</div>
+                                            <div class="room_title">{{ ($val->house_type==1)? 'Small':($val->house_type==2)?'Medium':'Large' }}</div>
+                                            <div class="room_price">{{ $val->price }}</div>
+                                            <div class="room_text">{{ $val->location }}</div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 text-lg-right">
                                         <div class="room_button">
-                                            <div class="button book_button trans_200"><a href="{{ url('single-house-details') }}">Details</a></div>
+                                            <div class="button book_button trans_200"><a href="{{ url('single-house-details/'.$val->id) }}">Details</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -83,29 +84,47 @@
                             @endforeach
                         </div>
 
-                        <!--
+                        @if( (isset(auth()->user()->user_type)) && ((auth()->user()->user_type ==2) || (auth()->user()->user_type ==3)))
+                            <div class="row">
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <div class="offers_grid">
+                                        <form method="post" action="{{url('house-review/'.$house->id)}}" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="form-row">
+                                                <input type="hidden" value="{{ $house->id }}" name="review_house_id">
+                                                <div class="form-group col-md-6">
+                                                    <label for="review">Review</label>
+                                                    <textarea class="form-control" name="review" id="review" rows="6"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-info">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="reviews">
-                            <div class="reviews_title">reviews</div>
+                            @if(count($reviews) > 0)<div class="reviews_title">reviews</div>@endif
                             <div class="reviews_container">
-                                @foreach(range(1,4) as $val)
+                                @foreach($reviews as $review)
                                 <div class="review">
                                     <div class="row">
                                         <div class="col-lg-1">
                                             <div class="review_image">
-                                                <img src="{{ asset('frequently-changing/frontend/images/review_1.jpg') }}" alt="https://unsplash.com/@saaout">
+                                                <img src="{{ asset('frequently-changing/frontend/images/review_1.jpg') }}" alt="img">
                                             </div>
                                         </div>
                                         <div class="col-lg-11">
                                             <div class="review_content">
                                                 <div class="review_title_container">
-                                                    <div class="review_title">"We loved the services"</div>
-                                                    <div class="review_rating">9.5</div>
+                                                    <div class="review_title">{{ $review->reviewBy->name?? '' }}</div>
                                                 </div>
                                                 <div class="review_text">
-                                                    <p>Tetur adipiscing elit. Nullam eu convallis tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer elementum orci eu vehicula pretium. Donec bibendum tristique condimentum.</p>
+                                                    <p>{!! $review->review ??'' !!}</p>
                                                 </div>
-                                                <div class="review_name">Christinne Smith</div>
-                                                <div class="review_date">12 November 2017</div>
+                                                <div class="review_date">{{ $review->created_at?? '' }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +132,6 @@
                                 @endforeach
                             </div>
                         </div>
-                        -->
-
                     </div>
                 </div>
             </div>

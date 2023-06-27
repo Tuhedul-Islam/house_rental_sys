@@ -60,6 +60,11 @@
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     @endif
+                                    @if($user_type==2)
+                                        <a href="{{ asset('/house-owners/house-list/'.$user->id) }}" class="btn btn-sm btn-info action_btn" title="House List">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

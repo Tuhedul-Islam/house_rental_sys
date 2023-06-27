@@ -18,7 +18,9 @@
                         @if( (isset(auth()->user()->user_type)) && ((auth()->user()->user_type ==2) || (auth()->user()->user_type ==3)))
                             <div class="user_box_login user_box_link"><a href="{{ url('user-dashboard') }}">{!! \Illuminate\Support\Facades\Auth::user()->name !!}</a></div>
                             <div class="user_box_login user_box_link"><a href="{{ url('user-dashboard') }}">{!! 'Dashboard' !!}</a></div>
-                            <div class="user_box_login user_box_link"><a href="{{ url('add-new-house') }}">{!! 'Add New House' !!}</a></div>
+                            @if(auth()->user()->user_type ==2)<div class="user_box_login user_box_link"><a href="{{ url('add-new-house') }}">{!! 'Add New House' !!}</a></div>@endif
+                            <div class="user_box_login user_box_link"><a href="{{ url('owner-change-password') }}">{!! 'Change Password' !!}</a></div>
+                            <div class="user_box_login user_box_link"><a href="{{ url('all-booked-houses') }}">{!! 'Booked Houses' !!}</a></div>
                             <div class="user_box_register user_box_link"><a href="{{ url('user-logout') }}">{!! 'Logout' !!}</a></div>
                         @else
                             <div class="user_box_login user_box_link"><a href="{{ url('user-login') }}">Login</a></div>

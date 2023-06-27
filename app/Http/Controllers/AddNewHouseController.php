@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddNewHouse;
+use App\Models\HouseReview;
 use Exception;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Http\Request;
@@ -18,7 +19,12 @@ class AddNewHouseController extends Controller
         $no_of_belcony = $request->input('no_of_belcony');
         $gas_available = $request->input('gas_available');
 
-        $houses = AddNewHouse::where('created_by', Auth::user()->id);
+        if (Auth::user()->user_type==2){
+            $houses = AddNewHouse::where('created_by', Auth::user()->id);
+        }else{
+            $houses = AddNewHouse::where('booked_status', 0);
+        }
+
         if ($house_type){
             $houses->where('house_type', $house_type);
         }
@@ -36,7 +42,11 @@ class AddNewHouseController extends Controller
         }
         $houses = $houses->get();
 
-        return view('frontend.user-dashboard', compact('houses'));
+        if (Auth::user()->user_type==2){
+            return view('frontend.user-dashboard', compact('houses'));
+        }else{
+            return view('frontend.client-dashboard', compact('houses'));
+        }
     }
 
     public function create(){
@@ -109,6 +119,50 @@ class AddNewHouseController extends Controller
         } catch (RecordsNotFoundException $exception) {
             return back()->withErrors($exception->getMessage());
         }
+    }
+
+    public function hOwnerChangePass(){
+        return view('frontend.house-owner-change-pass');
+    }
+
+    public function updateOwnerPass(Request $request){
+        $user = Auth::user();
+        if ($request->n_pass == $request->c_pass){
+            $user->password = bcrypt($request->n_pass);
+            $user->save();
+            toastr()->success('Password change successfully!');
+            return redirect('user-dashboard');
+        }else{
+            toastr()->error('New Password & Confirm Password Not Matched!');
+            return redirect()->back();
+        }
+    }
+
+    public function bookedHouse($house_id)
+    {
+        $house_info = AddNewHouse::find($house_id);
+        $house_info->booked_status = 1;
+        $house_info->booked_by = Auth::user()->id;
+        $house_info->save();
+        toastr()->success('House Booked successfully!');
+        return redirect('all-houses');
+    }
+
+    public function allBookedHouses()
+    {
+        $booked_houses = AddNewHouse::with('bookedBy')->where('booked_status', 1)->get();
+        return view('frontend.all-booked-houses', compact('booked_houses'));
+    }
+
+    public function houseReview(Request $request, $house_id){
+        $review = new HouseReview();
+        $review->user_id = Auth::user()->id;
+        $review->house_id = $house_id;
+        $review->review = $request->review;
+        $review->save();
+
+        toastr()->success('Review Successfully completed!');
+        return redirect()->back();
     }
 
 }
