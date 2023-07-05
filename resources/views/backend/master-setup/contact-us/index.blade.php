@@ -16,10 +16,10 @@
                 <div class="card-header" style="background-color: #DDDDDD">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="m-0">About Us</h3>
+                            <h3 class="m-0">Contact Us</h3>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ url('contact-us/create') }}" class="btn btn-sm btn-success">Add</a>
+{{--                            <a href="{{ url('contact-us/create') }}" class="btn btn-sm btn-success">Add</a>--}}
                         </div>
                     </div>
                 </div>

@@ -55,6 +55,7 @@ Route::get('/all-houses', [ FrontendController::class, 'allHouses']);
 Route::get('/single-house-details/{id}', [ FrontendController::class, 'singleHouseDetails']);
 Route::get('/about', [ FrontendController::class, 'aboutUs']);
 Route::get('/contact', [ FrontendController::class, 'contactUs']);
+Route::post('/contact-us/store', [ContactUsController::class, 'store' ]);
 //Register/login Client
 Route::post('/user-register', [ ClientRegisterController::class, 'userRegister']);
 Route::post('/user-login', [ ClientRegisterController::class, 'userLogin']);
@@ -200,7 +201,6 @@ Route::group(['middleware'=>['auth', 'locale', 'checkFrontendUser']],function() 
 
     /********************************************Contact US Route Start Here**************************/
     Route::get('/contact-us', [ContactUsController::class, 'index']);
-    Route::post('/contact-us/store', [ContactUsController::class, 'store' ])->withoutMiddleware('auth');
     Route::get('/contact-us/view/{id}', [ContactUsController::class, 'view' ]);
     Route::get('/contact-us/delete/{id}', [ContactUsController::class, 'delete' ]);
     /********************************************Contact US Route End Here***************************/

@@ -128,9 +128,9 @@
                 <!-- Master Data Setup -->
                 @if(auth()->user()->hasAnyRole($all_roles))
                 <?php
-                $menu_open = (Request::is('sliders*') || Request::is('about-us*') || Request::is('contact-us*'))? 'menu-is-opening menu-open':'';
+                $menu_open = (Request::is('sliders*') || Request::is('about-us*'))? 'menu-is-opening menu-open':'';
                 ?>
-                @canany(['slider-list', 'about-us', 'contact-us'])
+                @canany(['slider-list', 'about-us'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-tools"></i>
@@ -156,14 +156,6 @@
                                 </a>
                             </li>
                         @endif
-                        @if(auth()->user()->can('contact-us'))
-                            <li class="nav-item">
-                                <a href="{{ url('contact-us') }}" class="nav-link {{ (Request::is('contact-us*'))? 'active':'' }}">
-                                    <i class="far fa-circle mr-1"></i>
-                                    <p>Contact Us</p>
-                                </a>
-                            </li>
-                        @endif
                     </ul>
                 </li>
                 @endcanany
@@ -172,8 +164,8 @@
 
                 <!-- System Management -->
                 @if(auth()->user()->hasAnyRole($all_roles))
-                <?php $menu_open = (Request::is('settings*'))? 'menu-is-opening menu-open':''; ?>
-                @canany(['system-setting','language-setting','email-setting', 'activity-log'])
+                <?php $menu_open = (Request::is('settings*') || Request::is('contact-us*'))? 'menu-is-opening menu-open':''; ?>
+                @canany(['system-setting','language-setting','email-setting', 'activity-log', 'contact-us'])
                 <li class="nav-item {{ $menu_open }}">
                     <a href="#" class="nav-link {{ !empty($menu_open) ? 'active':'' }}">
                         <i class="mr-1 fas fa-users"></i>
@@ -211,9 +203,17 @@
                         <li class="nav-item">
                             <a href="{{ url('/settings/all-reviews') }}" class="nav-link {{ (Request::is('settings//all-reviews'))? 'active':'' }}">
                                 <i class="far fa-circle mr-1"></i>
-                                <p>Activity Logs</p>
+                                <p>Review/FeedBacks</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->can('contact-us'))
+                            <li class="nav-item">
+                                <a href="{{ url('contact-us') }}" class="nav-link {{ (Request::is('contact-us*'))? 'active':'' }}">
+                                    <i class="far fa-circle mr-1"></i>
+                                    <p>Contact Us</p>
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </li>
