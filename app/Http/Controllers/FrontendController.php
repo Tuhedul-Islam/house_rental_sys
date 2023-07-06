@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddNewHouse;
+use App\Models\HouseBookedHistory;
 use App\Models\HouseReview;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -14,8 +15,17 @@ class FrontendController extends Controller
     public function index(){
         $sliders = Slider::where('status', 1)->get();
         $top_review_houses = HouseReview::with('reviewedHouse')->select('house_id')->groupBy('house_id')->limit(3)->get();
+        $last_ten_reviews = HouseReview::with('reviewedHouse', 'reviewBy')->orderBy('id', 'DESC')->limit(10)->get();
+        $best_offer_rooms = AddNewHouse::where('no_of_rooms', '>=', '3')->orderBy('id', 'DESC')->orderBy('price', 'ASC')->limit(6)->get();
+        $trending_houses = HouseBookedHistory::with('bookedHouseDetails')->select('house_id')->groupBy('house_id')->limit(8)->get();
 
-        return view('frontend.home', compact('sliders', 'top_review_houses'));
+        $data = [
+            'last_ten_reviews' => $last_ten_reviews,
+            'best_offer_rooms' => $best_offer_rooms,
+            'trending_houses' => $trending_houses,
+        ];
+
+        return view('frontend.home', $data, compact('sliders', 'top_review_houses'));
     }
 
     public function login(){

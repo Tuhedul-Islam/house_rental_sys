@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="hotel_title_button ml-lg-auto text-lg-right">
                                     <div class="button book_button trans_200">
-                                        @if((auth()->user()->user_type==3) && ($house->booked_status==0))<a href="{{ url('booked-house/'.$house->id) }}">book</a>@endif
+                                        @if( isset(auth()->user()->user_type) &&  (auth()->user()->user_type==3) && ($house->booked_status==0))<a href="{{ url('booked-house/'.$house->id) }}">book</a>@endif
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                             @endforeach
                         </div>
 
-                        @if( ((isset( auth()->user()->user_type)) && (auth()->user()->user_type ==3)) || (auth()->user()->id != $house->created_by ))
+                        @if( (isset( auth()->user()->user_type) && (auth()->user()->user_type ==3)) || (isset(auth()->user()->id) && (auth()->user()->id != $house->created_by )) )
                             <div class="row">
                                 <div class="col-lg-12" style="margin-bottom: 10px">
                                     <div class="offers_grid">
