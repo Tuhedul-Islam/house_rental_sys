@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\AddNewHouse;
 use App\Models\HouseBookedHistory;
 use App\Models\HouseReview;
@@ -74,7 +75,8 @@ class FrontendController extends Controller
     }
 
     public function aboutUs(){
-        return view('frontend.about-us');
+        $about_us = AboutUs::first();
+        return view('frontend.about-us', compact('about_us'));
     }
 
     public function contactUs(){
