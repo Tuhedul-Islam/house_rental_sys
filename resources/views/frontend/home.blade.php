@@ -331,9 +331,9 @@
                     <div class="trending_item clearfix">
                         <div class="trending_image"><img src="{{ asset($tr->bookedHouseDetails->image??'') }}" alt="Trending House"></div>
                         <div class="trending_content">
-                            <div class="trending_title"><a href="#">grand hotel</a></div>
-                            <div class="trending_price">{{ $tr->price??'' }}</div>
-                            <div class="trending_location">{{ $tr->location??'' }}</div>
+                            <!--<div class="trending_title"><a href="#">grand hotel</a></div>-->
+                            <div class="trending_price">{{ $tr->bookedHouseDetails->price??'' }}</div>
+                            <div class="trending_location">{{ $tr->bookedHouseDetails->location??'' }}</div>
                         </div>
                     </div>
                 </div>
