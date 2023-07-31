@@ -100,7 +100,7 @@
                                             </div>
                                             <p class="offers_text">{{ $house->description??'' }}</p>
                                             <div class="button book_button"><a href="{{ url('single-house-details/'.$house->id) }}">Details</a></div>
-                                            <div class="offer_reviews">
+                                            <div class="offer_reviews d-none">
                                                 <div class="offer_reviews_content">
                                                     <div class="offer_reviews_title">very good</div>
                                                     <div class="offer_reviews_subtitle">100 reviews</div>

@@ -33,7 +33,7 @@
 
                             <div class="hotel_image">
                                 <img height="600px" src="{{ asset($house->image) }}" alt="">
-                                <div class="hotel_review_container d-flex flex-column align-items-center justify-content-center">
+                                {{--<div class="hotel_review_container d-flex flex-column align-items-center justify-content-center">
                                     <div class="hotel_review">
                                         <div class="hotel_review_content">
                                             <div class="hotel_review_title">very good</div>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="hotel_review_rating text-center">8.1</div>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
 
                             <div class="hotel_info_text">

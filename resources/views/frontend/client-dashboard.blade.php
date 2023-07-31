@@ -121,7 +121,7 @@
                                             @if(auth()->user()->user_type==2)
                                                 <div class="btn btn-danger" onclick="return confirm('Are you Sure?')"><a class="text-white" href="{{ url('delete-single-house/'.$house->id) }}">Delete</a></div>
                                             @endif
-                                            <div class="offer_reviews">
+                                            <div class="offer_reviews d-none">
                                                 <div class="offer_reviews_content">
                                                     <div class="offer_reviews_title">very good</div>
                                                     <div class="offer_reviews_subtitle">100 reviews</div>
