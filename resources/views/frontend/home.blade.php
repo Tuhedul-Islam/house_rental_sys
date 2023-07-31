@@ -329,7 +329,7 @@
                 @foreach($trending_houses as $tr)
                 <div class="col-lg-3 col-sm-6">
                     <div class="trending_item clearfix">
-                        <div class="trending_image"><img src="{{ asset($tr->bookedHouseDetails->image??'') }}" alt="Trending House"></div>
+                        <div class="trending_image"><img height="60px" width="85px" src="{{ asset($tr->bookedHouseDetails->image??'') }}" alt="Trending House"></div>
                         <div class="trending_content">
                             <!--<div class="trending_title"><a href="#">grand hotel</a></div>-->
                             <div class="trending_price">{{ $tr->bookedHouseDetails->price??'' }}</div>

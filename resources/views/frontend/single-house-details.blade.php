@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="hotel_image">
-                                <img src="{{ asset($house->image) }}" alt="">
+                                <img height="600px" src="{{ asset($house->image) }}" alt="">
                                 <div class="hotel_review_container d-flex flex-column align-items-center justify-content-center">
                                     <div class="hotel_review">
                                         <div class="hotel_review_content">
