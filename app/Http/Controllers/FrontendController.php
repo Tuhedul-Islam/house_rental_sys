@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\AddNewHouse;
+use App\Models\HouseBookedHistory;
 use App\Models\HouseReview;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -14,8 +16,17 @@ class FrontendController extends Controller
     public function index(){
         $sliders = Slider::where('status', 1)->get();
         $top_review_houses = HouseReview::with('reviewedHouse')->select('house_id')->groupBy('house_id')->limit(3)->get();
+        $last_ten_reviews = HouseReview::with('reviewedHouse', 'reviewBy')->orderBy('id', 'DESC')->limit(10)->get();
+        $best_offer_rooms = AddNewHouse::where('no_of_rooms', '>=', '3')->orderBy('id', 'DESC')->orderBy('price', 'ASC')->limit(6)->get();
+        $trending_houses = HouseBookedHistory::with('bookedHouseDetails')->select('house_id')->groupBy('house_id')->limit(8)->get();
 
-        return view('frontend.home', compact('sliders', 'top_review_houses'));
+        $data = [
+            'last_ten_reviews' => $last_ten_reviews,
+            'best_offer_rooms' => $best_offer_rooms,
+            'trending_houses' => $trending_houses,
+        ];
+
+        return view('frontend.home', $data, compact('sliders', 'top_review_houses'));
     }
 
     public function login(){
@@ -31,6 +42,7 @@ class FrontendController extends Controller
         $no_of_rooms = $request->input('no_of_rooms');
         $price = $request->input('price');
         $no_of_belcony = $request->input('no_of_belcony');
+        $location = $request->input('location');
         $gas_available = $request->input('gas_available');
 
         $houses = AddNewHouse::where('booked_status', 0);
@@ -46,9 +58,12 @@ class FrontendController extends Controller
         if ($no_of_belcony){
             $houses->where('no_of_belcony', $no_of_belcony);
         }
-        if ($gas_available){
-            $houses->where('gas_available', $gas_available);
+        if ($location){
+            $houses->where('location', 'LIKE', "%$location%");
         }
+//        if ($gas_available){
+//            $houses->where('gas_available', $gas_available);
+//        }
 
         $houses = $houses->get();
         return view('frontend.all-houses', compact('houses'));
@@ -64,7 +79,8 @@ class FrontendController extends Controller
     }
 
     public function aboutUs(){
-        return view('frontend.about-us');
+        $about_us = AboutUs::first();
+        return view('frontend.about-us', compact('about_us'));
     }
 
     public function contactUs(){

@@ -70,6 +70,12 @@
                                         </div>
 
                                         <div class="search_item">
+                                            <div>Location</div>
+                                            <input type="text" name="location" class="check_in search_input" placeholder="location" value="{{ request()->input('location') }}">
+                                        </div>
+
+                                        <!--
+                                        <div class="search_item">
                                             <div>Gas Available</div>
                                             <select id="gas_available" name="gas_available" class="form-control">
                                                 <option value="">Select</option>
@@ -77,6 +83,7 @@
                                                 <option {{ (request()->input('gas_available') == 2)?'selected':'' }} value="2">No</option>
                                             </select>
                                         </div>
+                                        -->
 
                                         <button type="submit" class="button search_button">search</button>
                                     </form>
@@ -114,7 +121,7 @@
                                             @if(auth()->user())
                                                 <div class="btn btn-danger" onclick="return confirm('Are you Sure?')"><a class="text-white" href="{{ url('delete-single-house/'.$house->id) }}">Delete</a></div>
                                             @endif
-                                            <div class="offer_reviews">
+                                            <div class="offer_reviews d-none">
                                                 <div class="offer_reviews_content">
                                                     <div class="offer_reviews_title">very good</div>
                                                     <div class="offer_reviews_subtitle">100 reviews</div>

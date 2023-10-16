@@ -10,6 +10,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
+        <!--
         <li class="nav-item dropdown" title="Notifications">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
@@ -36,6 +37,7 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
+        -->
 
         <!-- Language -->
         <li class="nav-item bg-light" title="Language">
@@ -66,7 +68,7 @@
                     <div class="profile-img-dropdown_header align-items-center">
                         <div class="profile_img_box align-items-center" style="display: inline-flex;">
                             <img class="profile-img-div" src="{{ asset('frequently-changing/files/profile-img/profile-img.jpg') }}" alt="">
-                            <p class="mb-0 font-weight-bold text-gray">Profile Name</p>
+                            <p class="mb-0 font-weight-bold text-gray">{{ auth()->user()->user_name }}</p>
                         </div>
                         <div>
                             <form method="POST" action="{{ route('logout') }}">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddNewHouse;
+use App\Models\HouseBookedHistory;
 use App\Models\HouseReview;
 use Exception;
 use Illuminate\Database\RecordsNotFoundException;
@@ -17,6 +18,7 @@ class AddNewHouseController extends Controller
         $no_of_rooms = $request->input('no_of_rooms');
         $price = $request->input('price');
         $no_of_belcony = $request->input('no_of_belcony');
+        $location = $request->input('location');
         $gas_available = $request->input('gas_available');
 
         if (Auth::user()->user_type==2){
@@ -37,9 +39,12 @@ class AddNewHouseController extends Controller
         if ($no_of_belcony){
             $houses->where('no_of_belcony', $no_of_belcony);
         }
-        if ($gas_available){
-            $houses->where('gas_available', $gas_available);
+        if ($location){
+            $houses->where('location', 'LIKE', "%$location%");
         }
+//        if ($gas_available){
+//            $houses->where('gas_available', $gas_available);
+//        }
         $houses = $houses->get();
 
         if (Auth::user()->user_type==2){
@@ -144,6 +149,13 @@ class AddNewHouseController extends Controller
         $house_info->booked_status = 1;
         $house_info->booked_by = Auth::user()->id;
         $house_info->save();
+
+        //Booking History
+        $house_booked_history = new HouseBookedHistory();
+        $house_booked_history->house_id = $house_id;
+        $house_booked_history->user_id = Auth::user()->id;
+        $house_booked_history->save();
+
         toastr()->success('House Booked successfully!');
         return redirect('all-houses');
     }

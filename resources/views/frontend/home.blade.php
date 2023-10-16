@@ -168,9 +168,9 @@
 
                     <div class="cta_slider_container">
                         <div class="owl-carousel owl-theme cta_slider">
-
+                            @foreach($last_ten_reviews as $lr)
                             <div class="owl-item cta_item text-center">
-                                <div class="cta_title">maldives deluxe package</div>
+                                <div class="cta_title">{{ $lr->reviewBy->name??'' }}</div>
                                 <div class="rating_r rating_r_4">
                                     <i></i>
                                     <i></i>
@@ -178,35 +178,10 @@
                                     <i></i>
                                     <i></i>
                                 </div>
-                                <p class="cta_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec. Proin bibendum, augue faucibus tincidunt ultrices, tortor augue gravida lectus, et efficitur enim justo vel ligula.</p>
-                                <div class="button cta_button"><div class="button_bcg"></div><a href="#">book now</a></div>
+                                <p class="cta_text">{{ $lr->review??'' }}</p>
+                                {{--<div class="button cta_button"><div class="button_bcg"></div><a href="#">book now</a></div>--}}
                             </div>
-
-                            <div class="owl-item cta_item text-center">
-                                <div class="cta_title">maldives deluxe package</div>
-                                <div class="rating_r rating_r_4">
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                </div>
-                                <p class="cta_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec. Proin bibendum, augue faucibus tincidunt ultrices, tortor augue gravida lectus, et efficitur enim justo vel ligula.</p>
-                                <div class="button cta_button"><div class="button_bcg"></div><a href="#">book now</a></div>
-                            </div>
-
-                            <div class="owl-item cta_item text-center">
-                                <div class="cta_title">maldives deluxe package</div>
-                                <div class="rating_r rating_r_4">
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                </div>
-                                <p class="cta_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec. Proin bibendum, augue faucibus tincidunt ultrices, tortor augue gravida lectus, et efficitur enim justo vel ligula.</p>
-                                <div class="button cta_button"><div class="button_bcg"></div><a href="#">book now</a></div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="cta_slider_nav cta_slider_prev">
@@ -242,19 +217,19 @@
                 </div>
             </div>
             <div class="row offers_items">
-                @for($i=1; $i<5; $i++)
+                @foreach($best_offer_rooms as $br)
                 <div class="col-lg-6 offers_col">
                     <div class="offers_item">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="offers_image_container">
-                                    <div class="offers_image_background" style="background-image:url(frequently-changing/frontend/images/offer_<?php echo $i;?>.jpg)"></div>
-                                    <div class="offer_name"><a href="#">grand castle</a></div>
+                                    <div class="offers_image_background" style="background-image:url({{ $br->image??'' }})"></div>
+                                    <div class="offer_name"><a href="{{ url('single-house-details/'.$br->id) }}">grand castle</a></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="offers_content">
-                                    <div class="offers_price">$70<span>per night</span></div>
+                                    <div class="offers_price">{{ $br->price?? '' }}</div>
                                     <div class="rating_r rating_r_4 offers_rating">
                                         <i></i>
                                         <i></i>
@@ -262,26 +237,27 @@
                                         <i></i>
                                         <i></i>
                                     </div>
-                                    <p class="offers_text">Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor.</p>
-                                    <div class="offers_icons">
-                                        <ul class="offers_icons_list">
-                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/post.png') }}" alt=""></li>
-                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/compass.png') }}" alt=""></li>
-                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/bicycle.png') }}" alt=""></li>
-                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/sailboat.png') }}" alt=""></li>
-                                        </ul>
-                                    </div>
-                                    <div class="offers_link"><a href="#">read more</a></div>
+                                    <p class="offers_text">{{ \Illuminate\Support\Str::limit($br->description, 200) }} </p>
+{{--                                    <div class="offers_icons">--}}
+{{--                                        <ul class="offers_icons_list">--}}
+{{--                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/post.png') }}" alt=""></li>--}}
+{{--                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/compass.png') }}" alt=""></li>--}}
+{{--                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/bicycle.png') }}" alt=""></li>--}}
+{{--                                            <li class="offers_icons_item"><img src="{{ asset('frequently-changing/frontend/images/sailboat.png') }}" alt=""></li>--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
+                                    <div class="offers_link"><a href="{{ url('single-house-details/'.$br->id) }}">read more</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
 
+    <!--
     <div class="testimonials">
         <div class="test_border"></div>
         <div class="container">
@@ -340,6 +316,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <div class="trending">
         <div class="container">
@@ -349,18 +326,18 @@
                 </div>
             </div>
             <div class="row trending_container">
-                @for($i=1; $i<9; $i++)
+                @foreach($trending_houses as $tr)
                 <div class="col-lg-3 col-sm-6">
                     <div class="trending_item clearfix">
-                        <div class="trending_image"><img src="{{ asset("frequently-changing/frontend/images/trend_$i.png") }}" alt="https://unsplash.com/@fransaraco"></div>
+                        <div class="trending_image"><img height="60px" width="85px" src="{{ asset($tr->bookedHouseDetails->image??'') }}" alt="Trending House"></div>
                         <div class="trending_content">
-                            <div class="trending_title"><a href="#">grand hotel</a></div>
-                            <div class="trending_price">From $182</div>
-                            <div class="trending_location">madrid, spain</div>
+                            <!--<div class="trending_title"><a href="#">grand hotel</a></div>-->
+                            <div class="trending_price">{{ $tr->bookedHouseDetails->price??'' }}</div>
+                            <div class="trending_location">{{ $tr->bookedHouseDetails->location??'' }}</div>
                         </div>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
@@ -376,10 +353,11 @@
                 <div class="col-lg-7">
                     <div class="contact_form_container">
                         <div class="contact_title">get in touch</div>
-                        <form action="#" id="contact_form" class="contact_form">
-                            <input type="text" id="contact_form_name" class="contact_form_name input_field" placeholder="Name" required="required" data-error="Name is required.">
-                            <input type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="E-mail" required="required" data-error="Email is required.">
-                            <input type="text" id="contact_form_subject" class="contact_form_subject input_field" placeholder="Subject" required="required" data-error="Subject is required.">
+                        <form action="{{ url('/contact-us/store') }}" method="post" id="contact_form" class="contact_form">
+                            @csrf
+                            <input type="text" id="contact_form_name" class="contact_form_name input_field" name="name" placeholder="Name" required="required" data-error="Name is required.">
+                            <input type="email" id="contact_form_email" class="contact_form_email input_field" name="email" placeholder="E-mail" required="required" data-error="Email is required.">
+                            <input type="text" id="contact_form_subject" class="contact_form_subject input_field" name="subject" placeholder="Subject" required="required" data-error="Subject is required.">
                             <textarea id="contact_form_message" class="text_field contact_form_message" name="message" rows="4" placeholder="Message" required="required" data-error="Please, write us a message."></textarea>
                             <button type="submit" id="form_submit_button" class="form_submit_button button">send message</button>
                         </form>

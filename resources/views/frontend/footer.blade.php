@@ -1,14 +1,17 @@
+@php
+$about_us = \App\Models\AboutUs::first();
+@endphp
 <footer class="footer">
     <div class="container">
         <div class="row" style="justify-content: space-between; flex-direction: row-reverse;">
 
-            <div class="col-lg-4 footer_column">
+            <div class="col-lg-7 footer_column">
                 <div class="footer_col">
                     <div class="footer_content footer_about">
                         <div class="logo_container footer_logo">
                             <div class="logo"><a href="#"><img height="50" src="{{ asset('frequently-changing/frontend/images/logo.png') }}" alt="">Home Rent</a></div>
                         </div>
-                        <p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer eleme ntum orci eu vehicula pretium.</p>
+                        <p class="footer_about_text">{{ $about_us->desc??'' }}</p>
                         <ul class="footer_social_list">
                             <li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
                             <li class="footer_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
@@ -20,6 +23,7 @@
                 </div>
             </div>
 
+            <!--
             <div class="col-lg-3 footer_column">
                 <div class="footer_col">
                     <div class="footer_title">blog posts</div>
@@ -51,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <div class="col-lg-3 footer_column">
                 <div class="footer_col">
